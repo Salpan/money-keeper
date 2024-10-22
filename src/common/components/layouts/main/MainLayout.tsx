@@ -1,31 +1,57 @@
-import { FC, PropsWithChildren } from 'react';
+import { FC } from 'react';
 
 import { useStyles } from './styles';
 import { Menu, type MenuProps, Typography } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+export const MainLayout: FC = () => {
     const { styles } = useStyles();
+    const navigate = useNavigate();
 
     const handleMenu: MenuProps['onClick'] = (e) => {
         console.log('click ', e);
+        const path = e.keyPath.reverse().join('/');
+        navigate(path);
     };
 
     const items: MenuItem[] = [
         {
-            key: 'categories',
-            label: 'Categories',
+            key: 'budget',
+            label: 'Бюджет',
             children: [
                 {
-                    key: 'markets',
-                    label: 'Markets',
+                    key: 'budgetName',
+                    label: 'Budget1',
                 },
                 {
-                    key: 'child',
-                    label: 'Child',
+                    key: 'create',
+                    label: 'Создать бюджет',
                 },
             ],
+        },
+        {
+            key: 'trans',
+            label: 'Транзакции',
+            children: [
+                {
+                    key: 'rashodi',
+                    label: 'Расходы',
+                },
+                {
+                    key: 'popolnenie',
+                    label: 'Пополнение',
+                },
+            ],
+        },
+        {
+            key: 'analitic',
+            label: 'Аналитика',
+        },
+        {
+            key: 'settings',
+            label: 'Настройки',
         },
     ];
 
@@ -40,18 +66,11 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
                         onClick={handleMenu}
                         mode="inline"
                         items={items}
-                        style={{ borderRadius: '8px' }}
+                        style={{ borderRadius: '8px', width: '200px' }}
                     />
                 </section>
                 <section className={styles.content}>
-                    {children ?? (
-                        <Typography.Text
-                            type="secondary"
-                            className={styles.noContent}
-                        >
-                            No content
-                        </Typography.Text>
-                    )}
+                    <Outlet />
                 </section>
             </main>
             <footer className={styles.footer}>Salpan Inc. 2024</footer>
