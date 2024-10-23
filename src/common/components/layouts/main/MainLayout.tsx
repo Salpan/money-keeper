@@ -32,21 +32,21 @@ export const MainLayout: FC = () => {
             ],
         },
         {
-            key: 'trans',
+            key: 'transactions',
             label: 'Транзакции',
             children: [
                 {
-                    key: 'rashodi',
+                    key: 'spending',
                     label: 'Расходы',
                 },
                 {
-                    key: 'popolnenie',
+                    key: 'enrichment',
                     label: 'Пополнение',
                 },
             ],
         },
         {
-            key: 'analitic',
+            key: 'analytics',
             label: 'Аналитика',
         },
         {
