@@ -10,6 +10,7 @@ import {
 } from 'antd';
 import { FC } from 'react';
 import { categoriesList } from '../../../common/consts/categories-list';
+import { rules } from '../../../common/consts/rules';
 
 type Spending = {
     amount?: number;
@@ -24,7 +25,7 @@ export const Spending: FC = () => {
     };
 
     return (
-        <Flex gap={20} vertical>
+        <Flex gap={30} vertical>
             <Typography.Title level={4}>Новое поступление</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
                 <Space direction="vertical" size="large">
@@ -32,6 +33,7 @@ export const Spending: FC = () => {
                         label="Сумма"
                         name="amount"
                         layout="vertical"
+                        rules={[rules]}
                     >
                         <Input type="number" />
                     </Form.Item>
@@ -39,6 +41,7 @@ export const Spending: FC = () => {
                         label="Категория"
                         name="categories"
                         layout="vertical"
+                        rules={[rules]}
                     >
                         <Select>
                             {categoriesList

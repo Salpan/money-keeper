@@ -9,6 +9,7 @@ import {
     Typography,
 } from 'antd';
 import { FC } from 'react';
+import { rules } from '../../../common/consts/rules';
 
 type EnrichmentCreateFields = {
     amount?: number;
@@ -22,7 +23,7 @@ export const Enrichment: FC = () => {
     };
 
     return (
-        <Flex gap={20} vertical>
+        <Flex gap={30} vertical>
             <Typography.Title level={4}>Новое поступление</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
                 <Space direction="vertical" size="large">
@@ -30,6 +31,7 @@ export const Enrichment: FC = () => {
                         label="Сумма"
                         name="amount"
                         layout="vertical"
+                        rules={[rules]}
                     >
                         <Input type="number" />
                     </Form.Item>

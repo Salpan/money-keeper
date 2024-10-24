@@ -1,5 +1,6 @@
 import { Button, DatePicker, Flex, Form, Input, Space, Typography } from 'antd';
 import { FC } from 'react';
+import { rules } from '../../../common/consts/rules';
 
 type BudgetCreateFields = {
     name?: string;
@@ -14,7 +15,7 @@ export const BudgetCreate: FC = () => {
     };
 
     return (
-        <Flex gap={20} vertical>
+        <Flex gap={30} vertical>
             <Typography.Title level={4}>Создание бюджета</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
                 <Space direction="vertical" size="large">
@@ -22,6 +23,7 @@ export const BudgetCreate: FC = () => {
                         label="Название бюджета"
                         name="name"
                         layout="vertical"
+                        rules={[rules]}
                     >
                         <Input />
                     </Form.Item>
@@ -29,6 +31,7 @@ export const BudgetCreate: FC = () => {
                         label="Период"
                         name="period"
                         layout="vertical"
+                        rules={[rules]}
                     >
                         <DatePicker.RangePicker />
                     </Form.Item>
