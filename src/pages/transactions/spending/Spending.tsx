@@ -9,6 +9,7 @@ import {
     Typography,
 } from 'antd';
 import { FC } from 'react';
+import { categoriesList } from '../../../common/consts/categories-list';
 
 type Spending = {
     amount?: number;
@@ -40,30 +41,15 @@ export const Spending: FC = () => {
                         layout="vertical"
                     >
                         <Select>
-                            <Select.Option value="categories">
-                                Продукты
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                Авто
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                ЖКХ
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                Кафе, рестораны
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                Алкоголь
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                Одежда
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                Сотовая связь и интернет
-                            </Select.Option>
-                            <Select.Option value="categories">
-                                АЗС
-                            </Select.Option>
+                            {categoriesList
+                                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                                .map((category) => {
+                                    return (
+                                        <Select.Option value={category.value}>
+                                            {category.name}
+                                        </Select.Option>
+                                    );
+                                })}
                         </Select>
                     </Form.Item>
                     <Form.Item<Spending>
