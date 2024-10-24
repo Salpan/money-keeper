@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { FC } from 'react';
 import { categoriesList } from '../../../common/consts/categories-list';
-import { rules } from '../../../common/consts/rules';
+import { rules, rulesWithValidator } from '../../../common/consts/rules';
 
 type Spending = {
     amount?: number;
@@ -26,9 +26,9 @@ export const Spending: FC = () => {
 
     return (
         <Flex gap={30} vertical>
-            <Typography.Title level={4}>Новое поступление</Typography.Title>
+            <Typography.Title level={4}>Новая трата</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
-                <Space direction="vertical" size="large">
+                <Space direction="vertical" size={55}>
                     <Form.Item<Spending>
                         label="Сумма"
                         name="amount"
@@ -66,6 +66,7 @@ export const Spending: FC = () => {
                         label="Описание"
                         name="description"
                         layout="vertical"
+                        rules={[rulesWithValidator]}
                     >
                         <Input />
                     </Form.Item>

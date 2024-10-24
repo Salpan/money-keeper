@@ -1,6 +1,6 @@
 import { Button, DatePicker, Flex, Form, Input, Space, Typography } from 'antd';
 import { FC } from 'react';
-import { rules } from '../../../common/consts/rules';
+import { rules, rulesWithValidator } from '../../../common/consts/rules';
 
 type BudgetCreateFields = {
     name?: string;
@@ -18,12 +18,12 @@ export const BudgetCreate: FC = () => {
         <Flex gap={30} vertical>
             <Typography.Title level={4}>Создание бюджета</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
-                <Space direction="vertical" size="large">
+                <Space direction="vertical" size={55}>
                     <Form.Item<BudgetCreateFields>
                         label="Название бюджета"
                         name="name"
                         layout="vertical"
-                        rules={[rules]}
+                        rules={[rules, rulesWithValidator]}
                     >
                         <Input />
                     </Form.Item>

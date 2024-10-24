@@ -26,7 +26,7 @@ export const Enrichment: FC = () => {
         <Flex gap={30} vertical>
             <Typography.Title level={4}>Новое поступление</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
-                <Space direction="vertical" size="large">
+                <Space direction="vertical" size={55}>
                     <Form.Item<EnrichmentCreateFields>
                         label="Сумма"
                         name="amount"
