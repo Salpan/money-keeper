@@ -11,13 +11,13 @@ import {
 import { FC } from 'react';
 import { rules } from '../../../common/consts/rules';
 
-type EnrichmentCreateFields = {
+type IncomesCreateFields = {
     amount?: number;
     date?: string;
     method?: string;
 };
 
-export const Enrichment: FC = () => {
+export const Incomes: FC = () => {
     const finishHandler = (values: unknown) => {
         console.log(values);
     };
@@ -27,7 +27,7 @@ export const Enrichment: FC = () => {
             <Typography.Title level={4}>Новое поступление</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
                 <Space direction="vertical" size={55}>
-                    <Form.Item<EnrichmentCreateFields>
+                    <Form.Item<IncomesCreateFields>
                         label="Сумма"
                         name="amount"
                         layout="vertical"
@@ -35,14 +35,14 @@ export const Enrichment: FC = () => {
                     >
                         <Input type="number" />
                     </Form.Item>
-                    <Form.Item<EnrichmentCreateFields>
+                    <Form.Item<IncomesCreateFields>
                         label="Дата"
                         name="date"
                         layout="vertical"
                     >
                         <DatePicker />
                     </Form.Item>
-                    <Form.Item<EnrichmentCreateFields>
+                    <Form.Item<IncomesCreateFields>
                         label="Способ"
                         name="method"
                         layout="vertical"

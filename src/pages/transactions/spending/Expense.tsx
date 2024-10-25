@@ -12,14 +12,14 @@ import { FC } from 'react';
 import { categoriesList } from '../../../common/consts/categories-list';
 import { rules, rulesWithValidator } from '../../../common/consts/rules';
 
-type Spending = {
+type Expense = {
     amount?: number;
     categories?: string;
     date?: string;
     description?: string;
 };
 
-export const Spending: FC = () => {
+export const Expense: FC = () => {
     const finishHandler = (values: unknown) => {
         console.log(values);
     };
@@ -29,7 +29,7 @@ export const Spending: FC = () => {
             <Typography.Title level={4}>Новая трата</Typography.Title>
             <Form size="large" onFinish={finishHandler}>
                 <Space direction="vertical" size={55}>
-                    <Form.Item<Spending>
+                    <Form.Item<Expense>
                         label="Сумма"
                         name="amount"
                         layout="vertical"
@@ -37,7 +37,7 @@ export const Spending: FC = () => {
                     >
                         <Input type="number" />
                     </Form.Item>
-                    <Form.Item<Spending>
+                    <Form.Item<Expense>
                         label="Категория"
                         name="categories"
                         layout="vertical"
@@ -55,14 +55,14 @@ export const Spending: FC = () => {
                                 })}
                         </Select>
                     </Form.Item>
-                    <Form.Item<Spending>
+                    <Form.Item<Expense>
                         label="Дата"
                         name="date"
                         layout="vertical"
                     >
                         <DatePicker />
                     </Form.Item>
-                    <Form.Item<Spending>
+                    <Form.Item<Expense>
                         label="Описание"
                         name="description"
                         layout="vertical"

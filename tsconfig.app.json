@@ -18,7 +18,16 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+
+        /* Aliases */
+        "paths": {
+            "_components/*": ["./src/common/components/*"],
+            "_analytics/*": ["./src/pages/analytics/*"],
+            "_budget/*": ["./src/pages/budget/*"],
+            "_settings/*": ["./src/pages/settings/*"],
+            "_transactions/*": ["./src/pages/transactions/*"]
+        }
     },
     "include": ["src"]
 }

@@ -1,11 +1,11 @@
+import { Analytics } from '_analytics/Analytics';
+import { BudgetCreate } from '_budget/budget-create/BudgetCreate';
+import { BudgetName } from '_budget/budget-name/BudgetName';
+import { MainLayout } from '_components/layouts/main';
+import { Settings } from '_settings/Settings';
+import { Incomes } from '_transactions/incomes/Incomes';
+import { Expense } from '_transactions/spending/Expense';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { MainLayout } from '../common/components/layouts/main';
-import { Enrichment } from '../pages/transactions/enrichment/Enrichment';
-import { Spending } from '../pages/transactions/spending/Spending';
-import { Analytics } from '../pages/analytics/Analytics';
-import { Settings } from '../pages/settings/Settings';
-import { BudgetCreate } from '../pages/budget/budget-create/BudgetCreate';
-import { BudgetName } from '../pages/budget/budget-name/BudgetName';
 
 function App() {
     return (
@@ -18,12 +18,12 @@ function App() {
                     />
                     <Route path={'budget/create'} element={<BudgetCreate />} />
                     <Route
-                        path={'transactions/spending'}
-                        element={<Spending />}
+                        path={'transactions/expense'}
+                        element={<Expense />}
                     />
                     <Route
-                        path={'transactions/enrichment'}
-                        element={<Enrichment />}
+                        path={'transactions/incomes'}
+                        element={<Incomes />}
                     />
                     <Route path={'analytics'} element={<Analytics />} />
                     <Route path={'settings'} element={<Settings />} />
