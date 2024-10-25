@@ -9,8 +9,8 @@ import {
     Typography,
 } from 'antd';
 import { FC } from 'react';
-import { categoriesList } from '../../../common/consts/categories-list';
 import { rules, rulesWithValidator } from '_consts/rules';
+import { categoriesList } from '_consts/categoriesList';
 
 type Expense = {
     amount?: number;

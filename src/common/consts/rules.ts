@@ -5,7 +5,7 @@ type RulseFields = {
 
 export const rules: RulseFields = {
     required: true,
-    message: 'Это поле обязательноея для заполнени',
+    message: 'Это поле обязательно для заполнения',
 };
 
 export const rulesWithValidator = {
