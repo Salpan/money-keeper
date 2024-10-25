@@ -1,12 +1,26 @@
 import { useStyles } from '_components/layouts/main/styles';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
+import { useParams } from 'react-router-dom';
+import { useUnit } from 'effector-react';
+import { Empty } from './components/Empty';
+import { Skeleton } from './components/Skeleton';
 
 export const BudgetName: FC = () => {
     const { styles } = useStyles();
-    return (
-        <div className={styles.noContent}>
-            Здесь будет отоброжаться созданный бюджет с балансом, расходами и
-            графиками
-        </div>
-    );
+    const { id } = useParams();
+
+    const budget = useUnit($budget);
+
+    const isPending = useUnit(getBudgetByIdFx.pending);
+
+    useEffect(() => {
+        id && getBudgetEv(id);
+    }, [id]);
+
+    if (isPending) return <Skeleton />;
+
+    if (!budget) return <Empty />;
+
+    return <div className={styles.noContent}>{JSON.stringify(budget)}</div>;
 };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Menu, type MenuProps, Typography } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useStyles } from './styles';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -15,13 +15,15 @@ export const MainLayout: FC = () => {
         navigate(path);
     };
 
+    const { id } = useParams();
+
     const items: MenuItem[] = [
         {
             key: 'budget',
-            label: 'Бюджет',
+            label: 'Бюджеты',
             children: [
                 {
-                    key: 'budgetName',
+                    key: String(id),
                     label: 'Budget1',
                 },
                 {
