@@ -3,8 +3,8 @@ import { BudgetCreate } from '_budget/budget-create/BudgetCreate';
 import { BudgetName } from '_budget/budget-name/BudgetName';
 import { MainLayout } from '_components/layouts/main';
 import { Settings } from '_settings/Settings';
+import { Expense } from '_transactions/expense/Expense';
 import { Incomes } from '_transactions/incomes/Incomes';
-import { Expense } from '_transactions/spending/Expense';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {

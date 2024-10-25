@@ -1,5 +1,5 @@
+import { useStyles } from '_components/layouts/main/styles';
 import { FC } from 'react';
-import { useStyles } from '../../common/components/layouts/main/styles';
 
 export const Analytics: FC = () => {
     const { styles } = useStyles();

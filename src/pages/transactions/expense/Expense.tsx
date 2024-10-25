@@ -33,7 +33,7 @@ export const Expense: FC = () => {
                         label="Сумма"
                         name="amount"
                         layout="vertical"
-                        rules={[rules]}
+                        // rules={[rules]}
                     >
                         <Input type="number" />
                     </Form.Item>

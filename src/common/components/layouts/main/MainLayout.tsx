@@ -1,8 +1,7 @@
 import { FC } from 'react';
-
-import { useStyles } from './styles';
 import { Menu, type MenuProps, Typography } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useStyles } from './styles';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -36,11 +35,11 @@ export const MainLayout: FC = () => {
             label: 'Транзакции',
             children: [
                 {
-                    key: 'spending',
+                    key: 'expense',
                     label: 'Расходы',
                 },
                 {
-                    key: 'enrichment',
+                    key: 'incomes',
                     label: 'Пополнение',
                 },
             ],
