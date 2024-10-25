@@ -15,7 +15,9 @@ export const BudgetName: FC = () => {
     const isPending = useUnit(getBudgetByIdFx.pending);
 
     useEffect(() => {
-        id && getBudgetEv(id);
+        if (id) {
+            getBudgetEv(id);
+        }
     }, [id]);
 
     if (isPending) return <Skeleton />;
