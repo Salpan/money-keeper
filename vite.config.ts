@@ -10,6 +10,7 @@ export default defineConfig({
             _budget: '/src/pages/budget',
             _settings: '/src/pages/settings',
             _transactions: '/src/pages/transactions',
+            _consts: '/src/common/consts',
         },
     },
     plugins: [react()],

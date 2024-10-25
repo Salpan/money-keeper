@@ -1,6 +1,6 @@
+import { rules, rulesWithValidator } from '_consts/rules';
 import { Button, DatePicker, Flex, Form, Input, Space, Typography } from 'antd';
 import { FC } from 'react';
-import { rules, rulesWithValidator } from '../../../common/consts/rules';
 
 type BudgetCreateFields = {
     name?: string;

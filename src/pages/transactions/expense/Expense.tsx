@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { FC } from 'react';
 import { categoriesList } from '../../../common/consts/categories-list';
-import { rules, rulesWithValidator } from '../../../common/consts/rules';
+import { rules, rulesWithValidator } from '_consts/rules';
 
 type Expense = {
     amount?: number;
@@ -33,7 +33,7 @@ export const Expense: FC = () => {
                         label="Сумма"
                         name="amount"
                         layout="vertical"
-                        // rules={[rules]}
+                        rules={[rules]}
                     >
                         <Input type="number" />
                     </Form.Item>

@@ -1,3 +1,4 @@
+import { rules } from '_consts/rules';
 import {
     Button,
     DatePicker,
@@ -9,7 +10,6 @@ import {
     Typography,
 } from 'antd';
 import { FC } from 'react';
-import { rules } from '../../../common/consts/rules';
 
 type IncomesCreateFields = {
     amount?: number;
