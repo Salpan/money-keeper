@@ -47,7 +47,7 @@ export const Expense: FC = () => {
                             })}
                     </Select>
                 </Form.Item>
-                <Form.Item<Expense> label="Дата" name="date" layout="vertical">
+                <Form.Item<Expense> label="Дата" name="date">
                     <DatePicker />
                 </Form.Item>
                 <Form.Item<Expense>
