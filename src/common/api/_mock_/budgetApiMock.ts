@@ -1,4 +1,4 @@
-import { BudgetResponse } from '../../types/budget';
+import { BudgetResponse } from '_types/budget';
 
 export const budgetApiMock = {
     getBudgetById: (id: string): Promise<BudgetResponse> => {

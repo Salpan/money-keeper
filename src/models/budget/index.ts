@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore } from 'effector';
-import { BudgetDefaultDTO } from '../../common/types/budget';
-import { budgetApiMock } from '../../common/api/_mock_/budgetApiMock';
+import { BudgetDefaultDTO } from '_types/budget';
+import { budgetApiMock } from '_api/_mock_/budgetApiMock';
 
 const { getBudgetById } = budgetApiMock;
 

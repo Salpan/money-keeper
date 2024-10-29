@@ -8,7 +8,7 @@ import { Expense } from '_transactions/expense/Expense';
 import { Incomes } from '_transactions/incomes/Incomes';
 import { ConfigProvider } from 'antd';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import '../models/init';
+import '_models/init';
 
 function App() {
     return (

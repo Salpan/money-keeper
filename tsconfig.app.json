@@ -27,7 +27,10 @@
             "_budget/*": ["./src/pages/budget/*"],
             "_settings/*": ["./src/pages/settings/*"],
             "_transactions/*": ["./src/pages/transactions/*"],
-            "_consts/*": ["./src/common/consts/*"]
+            "_consts/*": ["./src/common/consts/*"],
+            "_models/*": ["./src/models/*"],
+            "_api/*": ["./src/common/api/*"],
+            "_types/*": ["./src/common/types/*"]
         }
     },
     "include": ["src"]
