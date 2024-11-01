@@ -1,14 +1,13 @@
 import { useStyles } from '_components/layouts/main/styles';
 import { FC, useEffect, useState } from 'react';
-import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
+import { getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
 import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
-import { Empty } from './components/Empty';
-import { Skeleton } from './components/Skeleton';
 import { List, Typography } from 'antd';
 import { Pie } from '@ant-design/charts';
 import { TestCategoriesList } from '_consts/testCategoriesList';
 import { transaction } from '_consts/transaction';
+import { Skelet } from './components/Skelet';
 
 export const BudgetName: FC = () => {
     const balance = 5000;
@@ -52,9 +51,7 @@ export const BudgetName: FC = () => {
     const { styles } = useStyles();
     const { id } = useParams();
 
-    const budget = useUnit($budget);
-
-    const isPending = useUnit(getBudgetByIdFx.pending);
+    // const budget = useUnit($budget);
 
     useEffect(() => {
         if (id) {
@@ -62,9 +59,11 @@ export const BudgetName: FC = () => {
         }
     }, [id]);
 
-    if (isPending) return <Skeleton />;
+    const isPending = useUnit(getBudgetByIdFx.pending);
 
-    if (!budget) return <Empty />;
+    // isPending = true;
+
+    if (isPending) return <Skelet />;
 
     return (
         <div className={styles.budgetConteiner}>
