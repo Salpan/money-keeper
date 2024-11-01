@@ -41,7 +41,11 @@ export const useStyles = createStyles(({ token }) => ({
         alignItems: 'center',
         width: '100%',
     },
-    conteiner: {},
+    conteiner: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+    },
     balance: {
         display: 'flex',
         flexDirection: 'row',

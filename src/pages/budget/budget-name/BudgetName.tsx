@@ -5,9 +5,10 @@ import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { Empty } from './components/Empty';
 import { Skeleton } from './components/Skeleton';
-import { Typography } from 'antd';
+import { List, Typography } from 'antd';
 import { Pie } from '@ant-design/charts';
 import { TestCategoriesList } from '_consts/testCategoriesList';
+import { transaction } from '_consts/transaction';
 
 export const BudgetName: FC = () => {
     const balance = 5000;
@@ -66,7 +67,7 @@ export const BudgetName: FC = () => {
     if (!budget) return <Empty />;
 
     return (
-        <div className={styles.balance}>
+        <div className={styles.conteiner}>
             <div className={styles.balance}>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
@@ -81,7 +82,36 @@ export const BudgetName: FC = () => {
                     <p>{expenses} USD</p>
                 </div>
             </div>
-            <Pie {...config} />
+            <div className={styles.balance}>
+                <div>
+                    <Pie {...config} />
+                </div>
+                <div>
+                    <List
+                        size="large"
+                        header={
+                            <Typography.Title level={5}>
+                                Последние транзакции
+                            </Typography.Title>
+                        }
+                        bordered
+                        dataSource={transaction}
+                        renderItem={() =>
+                            transaction.map((i) => {
+                                return (
+                                    <List.Item>
+                                        <List.Item.Meta
+                                            title={i.title}
+                                            description={i.description}
+                                        />
+                                        <div>{i.balance}</div>
+                                    </List.Item>
+                                );
+                            })
+                        }
+                    />
+                </div>
+            </div>
         </div>
     );
 };
