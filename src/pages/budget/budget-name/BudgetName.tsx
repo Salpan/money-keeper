@@ -67,8 +67,8 @@ export const BudgetName: FC = () => {
     if (!budget) return <Empty />;
 
     return (
-        <div className={styles.conteiner}>
-            <div className={styles.balance}>
+        <div className={styles.budgetConteiner}>
+            <div className={styles.budgetBalance}>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
                     <p>{balance} USD</p>
@@ -82,7 +82,7 @@ export const BudgetName: FC = () => {
                     <p>{expenses} USD</p>
                 </div>
             </div>
-            <div className={styles.balance}>
+            <div className={styles.budgetMain}>
                 <div>
                     <Pie {...config} />
                 </div>
@@ -95,7 +95,8 @@ export const BudgetName: FC = () => {
                             </Typography.Title>
                         }
                         bordered
-                        dataSource={transaction}
+                        style={{ width: '500px' }}
+                        dataSource={[1]} // не пойму взаимосвязь, может с помощью неё можно обойтись без map()
                         renderItem={() =>
                             transaction.map((i) => {
                                 return (

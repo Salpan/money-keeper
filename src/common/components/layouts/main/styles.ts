@@ -41,19 +41,25 @@ export const useStyles = createStyles(({ token }) => ({
         alignItems: 'center',
         width: '100%',
     },
-    conteiner: {
+    budgetConteiner: {
         display: 'flex',
         flexDirection: 'column',
         flexGrow: 1,
     },
-    balance: {
+    budgetBalance: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-        backgroundColor: '#ffffff',
         marginBottom: '20px',
         borderRadius: '10px',
     },
-    text: {},
+    budgetMain: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        marginTop: '150px',
+        borderRadius: '10px',
+    },
 }));
