@@ -1,16 +1,9 @@
 import { useStyles } from '_components/layouts/main/styles';
-import { $budget } from '_models/budget';
-import { useUnit } from 'effector-react';
 import { FC } from 'react';
-import { Empty } from './Empty';
 import { List, Skeleton, Typography } from 'antd';
 
 export const Skelet: FC = () => {
     const { styles } = useStyles();
-
-    const budget = useUnit($budget);
-
-    if (!budget) return <Empty />;
 
     return (
         <div className={styles.budgetConteiner}>
