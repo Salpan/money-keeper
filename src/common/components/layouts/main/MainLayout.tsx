@@ -1,13 +1,33 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Menu, type MenuProps, Typography } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useStyles } from './styles';
+import { useUnit } from 'effector-react';
+import { $budget, $budgetList, getAllBudgetsEv } from '_models/budget';
+import { setNavigateEv } from '_models/navigation';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export const MainLayout: FC = () => {
     const { styles } = useStyles();
     const navigate = useNavigate();
+
+    const budget = useUnit($budget);
+
+    const budgetList = useUnit($budgetList);
+
+    useEffect(() => {
+        getAllBudgetsEv();
+    }, []);
+
+    useEffect(() => {
+        setNavigateEv(navigate);
+    }, [navigate]);
+
+    const budgetMenuItems = budgetList.map(({ id, name }) => ({
+        key: id,
+        label: name,
+    }));
 
     const handleMenu: MenuProps['onClick'] = (e) => {
         console.log('click ', e);
@@ -20,10 +40,7 @@ export const MainLayout: FC = () => {
             key: 'budget',
             label: 'Бюджеты',
             children: [
-                {
-                    key: 'testID',
-                    label: 'Budget1',
-                },
+                ...budgetMenuItems,
                 {
                     key: 'create',
                     label: 'Создать бюджет',
@@ -62,6 +79,9 @@ export const MainLayout: FC = () => {
             <main className={styles.main}>
                 <section>
                     <Menu
+                        defaultSelectedKeys={
+                            budget?.id ? [budget.id, 'budget'] : undefined
+                        }
                         onClick={handleMenu}
                         mode="inline"
                         items={items}

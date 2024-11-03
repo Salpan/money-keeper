@@ -14,7 +14,7 @@ export const BudgetName: FC = () => {
     const income = 2000;
     const expenses = 1500;
 
-    const [data, setData] = useState([{}]);
+    const [data, setData] = useState<{ type: string; value: number }[]>([]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -61,8 +61,6 @@ export const BudgetName: FC = () => {
 
     const isPending = useUnit(getBudgetByIdFx.pending);
 
-    // isPending = true;
-
     if (isPending) return <Skelet />;
 
     return (
@@ -95,20 +93,16 @@ export const BudgetName: FC = () => {
                         }
                         bordered
                         style={{ width: '500px' }}
-                        dataSource={[1]} // не пойму взаимосвязь, может с помощью неё можно обойтись без map()
-                        renderItem={() =>
-                            transaction.map((i) => {
-                                return (
-                                    <List.Item>
-                                        <List.Item.Meta
-                                            title={i.title}
-                                            description={i.description}
-                                        />
-                                        <div>{i.balance}</div>
-                                    </List.Item>
-                                );
-                            })
-                        }
+                        dataSource={transaction}
+                        renderItem={(i) => (
+                            <List.Item>
+                                <List.Item.Meta
+                                    title={i.title}
+                                    description={i.description}
+                                />
+                                <div>{i.balance}</div>
+                            </List.Item>
+                        )}
                     />
                 </div>
             </div>

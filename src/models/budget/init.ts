@@ -1,5 +1,15 @@
 import { sample } from 'effector';
-import { $budget, getBudgetByIdFx, getBudgetEv } from '.';
+import {
+    $budget,
+    $budgetList,
+    addBudgetEv,
+    addBudgetFx,
+    getAllBudgetFx,
+    getAllBudgetsEv,
+    getBudgetByIdFx,
+    getBudgetEv,
+} from '.';
+import { navigateEv } from '_models/navigation';
 
 sample({
     clock: getBudgetEv,
@@ -7,6 +17,29 @@ sample({
 });
 
 sample({
-    clock: getBudgetByIdFx.doneData,
+    clock: [getBudgetByIdFx.doneData, addBudgetFx.doneData],
+    fn: (response) => response.data ?? null,
     target: $budget,
+});
+
+sample({
+    clock: getAllBudgetsEv,
+    target: getAllBudgetFx,
+});
+
+sample({
+    clock: getAllBudgetFx.doneData,
+    fn: (response) => response.data ?? [],
+    target: $budgetList,
+});
+
+sample({
+    clock: addBudgetEv,
+    target: addBudgetFx,
+});
+
+sample({
+    clock: addBudgetFx.doneData,
+    fn: (response) => (response.data?.id ? `budget/${response.data.id}` : ''),
+    target: [navigateEv, getAllBudgetsEv],
 });

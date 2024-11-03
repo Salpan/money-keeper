@@ -10,6 +10,8 @@ import {
 import { FC } from 'react';
 import { rules, rulesWithValidator } from '_consts/rules';
 import { categoriesList } from '_consts/categoriesList';
+import { useUnit } from 'effector-react';
+import { $budget } from '_models/budget';
 
 type Expense = {
     amount?: number;
@@ -19,13 +21,17 @@ type Expense = {
 };
 
 export const Expense: FC = () => {
+    const budget = useUnit($budget);
+
     const finishHandler = (values: unknown) => {
         console.log(values);
     };
 
     return (
         <Flex gap={30} vertical>
-            <Typography.Title level={4}>Новая трата</Typography.Title>
+            <Typography.Title level={4}>
+                Новая трата для {budget?.name}
+            </Typography.Title>
             <Form size="large" layout="vertical" onFinish={finishHandler}>
                 <Form.Item<Expense> label="Сумма" name="amount" rules={[rules]}>
                     <Input type="number" />

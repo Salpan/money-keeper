@@ -6,7 +6,7 @@ export type BudgetDefaultDTO = {
 };
 
 export type BudgetRequest = {
-    name?: string;
+    name: string;
     period: string;
     startBudget?: number;
     endBudget?: number;
