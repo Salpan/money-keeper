@@ -34,7 +34,7 @@ export const BudgetName: FC = () => {
         angleField: 'value',
         colorField: 'type',
         lable: {
-            text: 'value', // не могу поменять значение при наведении
+            text: 'value',
             style: {
                 fontWeight: 'bold',
             },

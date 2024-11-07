@@ -12,13 +12,7 @@ import { rules, rulesWithValidator } from '_consts/rules';
 import { categoriesList } from '_consts/categoriesList';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
-
-type Expense = {
-    amount?: number;
-    categories?: string;
-    date?: string;
-    description?: string;
-};
+import { ExpenseField } from '_types/expense';
 
 export const Expense: FC = () => {
     const budget = useUnit($budget);
@@ -33,10 +27,14 @@ export const Expense: FC = () => {
                 Новая трата для {budget?.name}
             </Typography.Title>
             <Form size="large" layout="vertical" onFinish={finishHandler}>
-                <Form.Item<Expense> label="Сумма" name="amount" rules={[rules]}>
+                <Form.Item<ExpenseField>
+                    label="Сумма"
+                    name="amount"
+                    rules={[rules]}
+                >
                     <Input type="number" />
                 </Form.Item>
-                <Form.Item<Expense>
+                <Form.Item<ExpenseField>
                     label="Категория"
                     name="categories"
                     rules={[rules]}
@@ -53,10 +51,10 @@ export const Expense: FC = () => {
                             })}
                     </Select>
                 </Form.Item>
-                <Form.Item<Expense> label="Дата" name="date">
+                <Form.Item<ExpenseField> label="Дата" name="date">
                     <DatePicker />
                 </Form.Item>
-                <Form.Item<Expense>
+                <Form.Item<ExpenseField>
                     label="Описание"
                     name="description"
                     rules={[rulesWithValidator]}
