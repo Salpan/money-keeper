@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore } from 'effector';
 import { BudgetRequest, BudgetResponse } from '_types/budget';
-import { budgetApiMock } from '_api/_mock_/budgetApiMock';
+import { budgetApiMock } from '_api/_mock_/budget-api-mock/budgetApiMock';
 
 const { getBudgetById, getAllBudgets, postBudget } = budgetApiMock;
 

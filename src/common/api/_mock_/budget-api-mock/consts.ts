@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { faker } from '@faker-js/faker';
 
 export const mockBudgetList: BudgetResponse[] = Array.from(
-    { length: 5 },
+    { length: 4 },
     () => ({
         id: uuidv4(),
         name: faker.finance.transactionType(),

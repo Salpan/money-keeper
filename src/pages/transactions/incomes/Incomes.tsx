@@ -1,4 +1,5 @@
 import { rules } from '_consts/rules';
+import { IncomesCreateFields } from '_types/incomes';
 import {
     Button,
     DatePicker,
@@ -9,12 +10,6 @@ import {
     Typography,
 } from 'antd';
 import { FC } from 'react';
-
-type IncomesCreateFields = {
-    amount?: number;
-    date?: string;
-    method?: string;
-};
 
 export const Incomes: FC = () => {
     const finishHandler = (values: unknown) => {
