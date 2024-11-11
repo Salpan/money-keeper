@@ -12,7 +12,7 @@ import { rules, rulesWithValidator } from '_consts/rules';
 import { categoriesList } from '_consts/categoriesList';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
-import { ExpenseField } from '_types/expense';
+import { ExpenseField } from '_types/transactions';
 
 export const Expense: FC = () => {
     const budget = useUnit($budget);

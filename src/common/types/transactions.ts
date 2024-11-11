@@ -8,3 +8,5 @@ export type ExpenseField = {
 };
 
 export type IncomesField = Omit<ExpenseField, 'description'>;
+
+export type Transaction = ExpenseField | IncomesField;

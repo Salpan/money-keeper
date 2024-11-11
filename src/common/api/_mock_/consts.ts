@@ -29,7 +29,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
             },
             {
                 id: uuidv4(),
-                transaction: 'expense',
+                transaction: 'income',
                 categories:
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)

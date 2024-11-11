@@ -15,7 +15,7 @@ export const BudgetName: FC = () => {
         return acc + transaction.amount;
     }, 0);
 
-    const balance = budget?.startBudget - summExpense;
+    const balance = Number(budget?.startBudget) - Number(summExpense);
 
     // const summIncomes = 2000;
 
@@ -74,7 +74,7 @@ export const BudgetName: FC = () => {
             <div className={styles.budgetBalance}>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
-                    <p>{balance} USD</p>
+                    <p>{Number(balance)} USD</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Доходы:</Typography.Title>

@@ -8,6 +8,7 @@ import { FC } from 'react';
 export const BudgetCreate: FC = () => {
     const finishHandler = (values: BudgetRequest) => {
         addBudgetEv(values);
+        console.log(Number(values.startBudget));
     };
 
     const isPending = useUnit(addBudgetFx.pending);
