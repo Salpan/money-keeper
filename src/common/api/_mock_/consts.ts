@@ -12,5 +12,6 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
         period: '2024-01-01 - 2025-01-01',
         startBudget: faker.number.int({ min: 1000, max: 23000 }),
         endBudget: faker.number.int({ min: 1000, max: 23000 }),
+        transactions: {},
     }),
 );
