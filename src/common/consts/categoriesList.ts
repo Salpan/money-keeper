@@ -1,4 +1,4 @@
-type Categories = {
+export type Categories = {
     value: string;
     name: string;
 };

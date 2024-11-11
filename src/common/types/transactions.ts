@@ -1,0 +1,10 @@
+export type ExpenseField = {
+    id: string;
+    transaction: 'income' | 'expense';
+    categories: string;
+    description: string;
+    amount: number;
+    date: string;
+};
+
+export type IncomesField = Omit<ExpenseField, 'description'>;

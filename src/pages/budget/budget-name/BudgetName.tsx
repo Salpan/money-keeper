@@ -1,18 +1,23 @@
 import { useStyles } from '_components/layouts/main/styles';
 import { FC, useEffect, useState } from 'react';
-import { getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
+import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
 import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { List, Typography } from 'antd';
 import { Pie } from '@ant-design/charts';
 import { TestCategoriesList } from '_consts/testCategoriesList';
-import { transaction } from '_consts/transaction';
 import { Skelet } from './components/Skelet';
 
 export const BudgetName: FC = () => {
-    const balance = 5000;
-    const income = 2000;
-    const expenses = 1500;
+    const budget = useUnit($budget);
+
+    const summExpense = budget?.transactions?.reduce((acc, transaction) => {
+        return acc + transaction.amount;
+    }, 0);
+
+    const balance = budget?.startBudget - summExpense;
+
+    // const summIncomes = 2000;
 
     const [data, setData] = useState<{ type: string; value: number }[]>([]);
 
@@ -51,8 +56,6 @@ export const BudgetName: FC = () => {
     const { styles } = useStyles();
     const { id } = useParams();
 
-    // const budget = useUnit($budget);
-
     useEffect(() => {
         if (id) {
             getBudgetEv(id);
@@ -63,8 +66,11 @@ export const BudgetName: FC = () => {
 
     if (isPending) return <Skelet />;
 
+    console.log(budget);
+
     return (
         <div className={styles.budgetConteiner}>
+            <Typography.Title level={3}>{budget?.name}</Typography.Title>
             <div className={styles.budgetBalance}>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
@@ -72,11 +78,11 @@ export const BudgetName: FC = () => {
                 </div>
                 <div>
                     <Typography.Title level={4}>Доходы:</Typography.Title>
-                    <p>{income} USD</p>
+                    <p>{balance} USD</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Расходы:</Typography.Title>
-                    <p>{expenses} USD</p>
+                    <p>{summExpense} USD</p>
                 </div>
             </div>
             <div className={styles.budgetMain}>
@@ -93,16 +99,26 @@ export const BudgetName: FC = () => {
                         }
                         bordered
                         style={{ width: '500px' }}
-                        dataSource={transaction}
-                        renderItem={(i) => (
-                            <List.Item>
-                                <List.Item.Meta
-                                    title={i.title}
-                                    description={i.description}
-                                />
-                                <div>{i.balance}</div>
-                            </List.Item>
-                        )}
+                        dataSource={budget?.transactions}
+                        renderItem={(i) =>
+                            i.transaction === 'income' ? (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        title={i.categories}
+                                        description={i.description}
+                                    />
+                                    <div>+ {i.amount}</div>
+                                </List.Item>
+                            ) : (
+                                <List.Item>
+                                    <List.Item.Meta
+                                        title={i.categories}
+                                        description={i.description}
+                                    />
+                                    <div>- {i.amount}</div>
+                                </List.Item>
+                            )
+                        }
                     />
                 </div>
             </div>
