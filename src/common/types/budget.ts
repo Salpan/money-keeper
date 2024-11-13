@@ -1,4 +1,4 @@
-import { ExpenseField, IncomesField } from './transactions';
+import { ExpenseField } from './transactions';
 
 export type BudgetDefaultDTO = {
     id: string;
@@ -12,7 +12,7 @@ export type BudgetRequest = {
     period: string;
     startBudget?: number;
     endBudget?: number;
-    transactions?: ExpenseField[] | IncomesField[];
+    transactions?: ExpenseField[];
 };
 
 export type BudgetResponse = BudgetDefaultDTO & Omit<BudgetRequest, 'name'>;

@@ -7,15 +7,30 @@ import { List, Typography } from 'antd';
 import { Pie } from '@ant-design/charts';
 import { TestCategoriesList } from '_consts/testCategoriesList';
 import { Skelet } from './components/Skelet';
+import { BudgetResponse } from '_types/budget';
+
+const calculateTransactions = (
+    transactions: BudgetResponse['transactions'],
+    type: 'income' | 'expense',
+) => {
+    return transactions?.reduce((acc, trans) => {
+        return acc + (trans.transaction === type ? trans.amount : 0);
+    }, 0);
+};
 
 export const BudgetName: FC = () => {
     const budget = useUnit($budget);
 
-    const summExpense = budget?.transactions?.reduce((acc, transaction) => {
-        return acc + transaction.amount;
-    }, 0);
+    console.log(budget?.transactions);
 
-    const balance = Number(budget?.startBudget) - Number(summExpense);
+    const balance =
+        budget?.transactions?.reduce((acc, transaction) => {
+            if (transaction.transaction === 'income')
+                return acc + transaction.amount;
+            return acc - transaction.amount;
+        }, budget?.startBudget ?? 0) ?? 0;
+
+    console.log({ balance });
 
     // const summIncomes = 2000;
 
@@ -66,7 +81,7 @@ export const BudgetName: FC = () => {
 
     if (isPending) return <Skelet />;
 
-    console.log(budget);
+    console.log(budget?.transactions);
 
     return (
         <div className={styles.budgetConteiner}>
@@ -78,11 +93,17 @@ export const BudgetName: FC = () => {
                 </div>
                 <div>
                     <Typography.Title level={4}>Доходы:</Typography.Title>
-                    <p>{balance} USD</p>
+                    <p>
+                        {calculateTransactions(budget?.transactions, 'income')}{' '}
+                        USD
+                    </p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Расходы:</Typography.Title>
-                    <p>{summExpense} USD</p>
+                    <p>
+                        {calculateTransactions(budget?.transactions, 'expense')}{' '}
+                        USD
+                    </p>
                 </div>
             </div>
             <div className={styles.budgetMain}>
