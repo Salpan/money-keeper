@@ -7,6 +7,6 @@ export type ExpenseField = {
     date: string;
 };
 
-// export type IncomesField = Omit<ExpenseField, 'description'>;
+export type IncomeField = Omit<ExpenseField, 'description'>;
 
 export type Transaction = ExpenseField | IncomeField;

@@ -1,13 +1,16 @@
 import { useStyles } from '_components/layouts/main/styles';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
 import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { List, Typography } from 'antd';
-import { Pie } from '@ant-design/charts';
 import { TestCategoriesList } from '_consts/testCategoriesList';
 import { Skelet } from './components/Skelet';
 import { BudgetResponse } from '_types/budget';
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const calculateTransactions = (
     transactions: BudgetResponse['transactions'],
@@ -34,36 +37,38 @@ export const BudgetName: FC = () => {
 
     // const summIncomes = 2000;
 
-    const [data, setData] = useState<{ type: string; value: number }[]>([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setData(
-                TestCategoriesList.map((i) => {
-                    return {
-                        type: i.name,
-                        value: i.value,
-                    };
-                }),
-            );
-        }, 1000);
-    }, []);
-
-    const config = {
-        data,
-        angleField: 'value',
-        colorField: 'type',
-        lable: {
-            text: 'value',
-            style: {
-                fontWeight: 'bold',
+    const pieData = {
+        labels: budget?.transactions?.map((i) =>
+            i.transaction === 'expense' ? i.categories : null,
+        ),
+        datasets: [
+            {
+                label: ' рублей',
+                data: budget?.transactions?.map((i) => i.amount),
+                backgroundColor: TestCategoriesList.map(
+                    (i) => i.backgroundColor,
+                ),
+                borderColor: TestCategoriesList.map((i) => i.borderColor),
+                borderWidth: 1,
             },
-        },
-        legend: {
-            color: {
-                title: false,
-                position: 'left',
-                rowPadding: 5,
+        ],
+    };
+
+    const pieConfig = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+                align: 'start' as const,
+                labels: {
+                    boxWidth: 20,
+                    padding: 15,
+                    // textAlign: 'right',
+                },
+            },
+            title: {
+                display: true,
+                text: 'Test categories',
             },
         },
     };
@@ -108,7 +113,7 @@ export const BudgetName: FC = () => {
             </div>
             <div className={styles.budgetMain}>
                 <div>
-                    <Pie {...config} />
+                    <Pie data={pieData} options={pieConfig} />
                 </div>
                 <div>
                     <List
