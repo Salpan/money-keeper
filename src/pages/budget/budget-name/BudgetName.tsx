@@ -35,16 +35,16 @@ export const BudgetName: FC = () => {
 
     console.log({ balance });
 
-    // const summIncomes = 2000;
-
     const pieData = {
-        labels: budget?.transactions?.map((i) =>
-            i.transaction === 'expense' ? i.categories : null,
-        ),
+        labels: budget?.transactions
+            ?.filter((i) => i.transaction === 'expense')
+            .map((i) => i.categories),
         datasets: [
             {
                 label: ' рублей',
-                data: budget?.transactions?.map((i) => i.amount),
+                data: budget?.transactions
+                    ?.filter((i) => i.transaction === 'expense')
+                    .map((i) => i.amount),
                 backgroundColor: TestCategoriesList.map(
                     (i) => i.backgroundColor,
                 ),
