@@ -49,7 +49,7 @@ export const BudgetName: FC = () => {
                     (i) => i.backgroundColor,
                 ),
                 borderColor: TestCategoriesList.map((i) => i.borderColor),
-                borderWidth: 4,
+                borderWidth: 1,
             },
         ],
     };
@@ -58,18 +58,17 @@ export const BudgetName: FC = () => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'left' as const,
+                position: 'top' as const,
                 align: 'start' as const,
                 labels: {
+                    boxWidth: 20,
                     padding: 15,
-                    usePointStyle: true,
+                    // textAlign: 'right',
                 },
             },
             title: {
                 display: true,
                 text: 'Test categories',
-                position: 'top' as const,
-                padding: 1,
             },
         },
     };
@@ -113,7 +112,7 @@ export const BudgetName: FC = () => {
                 </div>
             </div>
             <div className={styles.budgetMain}>
-                <div style={{ width: '450px', height: '100%' }}>
+                <div>
                     <Pie data={pieData} options={pieConfig} />
                 </div>
                 <div>
