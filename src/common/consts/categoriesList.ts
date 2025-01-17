@@ -3,6 +3,8 @@ export type Categories = {
     name: string;
 };
 
+// 14 элементов нужно добавить разные цвета для диаграммы
+
 export const categoriesList: Categories[] = [
     {
         value: 'transfer',

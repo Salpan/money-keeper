@@ -26,6 +26,8 @@ export const BudgetName: FC = () => {
 
     console.log(budget?.transactions);
 
+    console.log(budget?.startBudget, 'start budget');
+
     const balance =
         budget?.transactions?.reduce((acc, transaction) => {
             if (transaction.transaction === 'income')
