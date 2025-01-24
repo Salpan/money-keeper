@@ -95,9 +95,9 @@ export const BudgetName: FC = () => {
         <div className={styles.budgetConteiner}>
             <Flex gap={100}>
                 <Typography.Title level={3}>{budget?.name}</Typography.Title>
-                <Typography.Title level={4}>
+                {/* <Typography.Title level={4}>
                     Период: {budget?.period}
-                </Typography.Title>
+                </Typography.Title> */}
             </Flex>
             <div className={styles.budgetBalance}>
                 <div>
