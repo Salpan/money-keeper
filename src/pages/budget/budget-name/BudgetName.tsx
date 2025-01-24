@@ -3,7 +3,7 @@ import { FC, useEffect } from 'react';
 import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
 import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
-import { List, Typography } from 'antd';
+import { Flex, List, Typography } from 'antd';
 import { TestCategoriesList } from '_consts/testCategoriesList';
 import { Skelet } from './components/Skelet';
 import { BudgetResponse } from '_types/budget';
@@ -93,8 +93,19 @@ export const BudgetName: FC = () => {
 
     return (
         <div className={styles.budgetConteiner}>
-            <Typography.Title level={3}>{budget?.name}</Typography.Title>
+            <Flex gap={100}>
+                <Typography.Title level={3}>{budget?.name}</Typography.Title>
+                <Typography.Title level={4}>
+                    Период: {budget?.period}
+                </Typography.Title>
+            </Flex>
             <div className={styles.budgetBalance}>
+                <div>
+                    <Typography.Title level={4}>
+                        Начальный капитал:
+                    </Typography.Title>
+                    <p>{budget?.startBudget} USD</p>
+                </div>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
                     <p>{Number(balance)} USD</p>
