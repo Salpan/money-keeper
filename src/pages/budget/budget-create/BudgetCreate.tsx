@@ -24,7 +24,6 @@ const formToBudgetConverter = (values: FormFields): BudgetRequest => {
 export const BudgetCreate: FC = () => {
     const finishHandler = (values: FormFields) => {
         addBudgetEv(formToBudgetConverter(values));
-        console.log(Number(values.startBudget));
     };
 
     const isPending = useUnit(addBudgetFx.pending);

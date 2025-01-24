@@ -12,7 +12,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
         name: faker.finance.transactionType(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        period: '2024-01-01 - 2025-01-01',
+        period: '2024/01/01 - 2025/01/01',
         startBudget: faker.number.int({ min: 1000, max: 23000 }),
         endBudget: faker.number.int({ min: 1000, max: 23000 }),
         transactions: [
@@ -30,6 +30,17 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
             {
                 id: uuidv4(),
                 transaction: 'income',
+                categories:
+                    categoriesList[
+                        Math.floor(Math.random() * categoriesList.length)
+                    ].name,
+                description: faker.lorem.sentence(),
+                amount: faker.number.int({ min: 500, max: 2500 }),
+                date: new Date().toISOString(),
+            },
+            {
+                id: uuidv4(),
+                transaction: 'expense',
                 categories:
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)
