@@ -9,6 +9,8 @@ import { Skelet } from './components/Skelet';
 import { BudgetResponse } from '_types/budget';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import dayjs from 'dayjs';
+import { categoriesDictionary } from '_consts/categoriesList';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -16,9 +18,14 @@ const calculateTransactions = (
     transactions: BudgetResponse['transactions'],
     type: 'income' | 'expense',
 ) => {
-    return transactions?.reduce((acc, trans) => {
-        return acc + (trans.transaction === type ? trans.amount : 0);
+    const result = transactions?.reduce((acc, trans) => {
+        if (trans.transaction === type) {
+            return acc + trans.amount;
+        }
+        return acc;
     }, 0);
+    console.log({ result });
+    return result;
 };
 
 export const BudgetName: FC = () => {
@@ -33,14 +40,19 @@ export const BudgetName: FC = () => {
             if (transaction.transaction === 'income')
                 return acc + transaction.amount;
             return acc - transaction.amount;
-        }, budget?.startBudget ?? 0) ?? 0;
+        }, budget?.startBudget ?? 0) ??
+        budget?.startBudget ??
+        0;
 
     console.log({ balance });
 
     const pieData = {
         labels: budget?.transactions
             ?.filter((i) => i.transaction === 'expense')
-            .map((i) => i.categories),
+            .map(
+                (transaction) =>
+                    categoriesDictionary[transaction.categories]?.name,
+            ),
         datasets: [
             {
                 label: ' рублей',
@@ -60,7 +72,7 @@ export const BudgetName: FC = () => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'left' as const,
+                position: 'top' as const,
                 align: 'start' as const,
                 labels: {
                     padding: 15,
@@ -93,11 +105,12 @@ export const BudgetName: FC = () => {
 
     return (
         <div className={styles.budgetConteiner}>
-            <Flex gap={100}>
+            <Flex justify="space-between" gap={100}>
                 <Typography.Title level={3}>{budget?.name}</Typography.Title>
-                {/* <Typography.Title level={4}>
-                    Период: {budget?.period}
-                </Typography.Title> */}
+                <Typography.Title level={4}>
+                    Период:{' '}
+                    {`${dayjs(budget?.period[0]).format(`DD.MM.YYYY`)} - ${dayjs(budget?.period[1]).format(`DD.MM.YYYY`)}`}
+                </Typography.Title>
             </Flex>
             <div className={styles.budgetBalance}>
                 <div>
@@ -126,7 +139,7 @@ export const BudgetName: FC = () => {
                 </div>
             </div>
             <div className={styles.budgetMain}>
-                <div style={{ width: '450px', height: '100%' }}>
+                <div style={{ width: '600px', height: '100%' }}>
                     <Pie data={pieData} options={pieConfig} />
                 </div>
                 <div>
@@ -139,7 +152,12 @@ export const BudgetName: FC = () => {
                         }
                         bordered
                         style={{ width: '500px' }}
-                        dataSource={budget?.transactions}
+                        dataSource={budget?.transactions?.map((trans) => ({
+                            ...trans,
+                            key: trans.id,
+                            categories:
+                                categoriesDictionary[trans.categories]?.name,
+                        }))}
                         renderItem={(i) =>
                             i.transaction === 'income' ? (
                                 <List.Item>

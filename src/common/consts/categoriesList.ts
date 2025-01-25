@@ -63,3 +63,10 @@ export const categoriesList: Categories[] = [
         name: 'Такси',
     },
 ];
+
+export const categoriesDictionary = categoriesList.reduce<
+    Record<string, Categories>
+>((acc, { name, value }) => {
+    acc[value] = { name, value };
+    return acc;
+}, {});

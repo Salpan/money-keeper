@@ -6,7 +6,11 @@ import { Settings } from '_settings/Settings';
 import { Expense } from '_transactions/expense/Expense';
 import { Incomes } from '_transactions/incomes/Incomes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import dayjs from 'dayjs';
 import '_models/init';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 function App() {
     return (

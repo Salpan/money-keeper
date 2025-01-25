@@ -12,13 +12,20 @@ import { rules, rulesWithValidator } from '_consts/rules';
 import { categoriesList } from '_consts/categoriesList';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
-import { ExpenseField } from '_types/transactions';
+import { ExpenseField, TransactionForm } from '_types/transactions';
+import { addTransactionFx, createTransactionEv } from '_models/transaction';
 
 export const Expense: FC = () => {
     const budget = useUnit($budget);
+    const isPending = useUnit(addTransactionFx.pending);
 
-    const finishHandler = (values: unknown) => {
+    const finishHandler = (values: TransactionForm) => {
         console.log(values);
+        createTransactionEv({
+            ...values,
+            transaction: 'expense',
+            amount: Number(values.amount),
+        });
     };
 
     return (
@@ -42,9 +49,12 @@ export const Expense: FC = () => {
                     <Select>
                         {categoriesList
                             .sort((a, b) => (a.name > b.name ? 1 : -1))
-                            .map((category) => {
+                            .map((category, index) => {
                                 return (
-                                    <Select.Option value={category.value}>
+                                    <Select.Option
+                                        key={index}
+                                        value={category.value}
+                                    >
                                         {category.name}
                                     </Select.Option>
                                 );
@@ -62,7 +72,9 @@ export const Expense: FC = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit">Сохранить транзакцию</Button>
+                    <Button loading={isPending} htmlType="submit">
+                        Сохранить транзакцию
+                    </Button>
                 </Form.Item>
             </Form>
         </Flex>
