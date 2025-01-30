@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { Menu, type MenuProps, Typography } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useStyles } from './styles';
 import { useUnit } from 'effector-react';
 import { $budget, $budgetList, getAllBudgetsEv } from '_models/budget';
@@ -71,6 +71,8 @@ export const MainLayout: FC = () => {
         },
     ];
 
+    const { id } = useParams();
+
     return (
         <div className={styles.wrapper}>
             <header className={styles.header}>
@@ -82,6 +84,8 @@ export const MainLayout: FC = () => {
                         defaultSelectedKeys={
                             budget?.id ? [budget.id, 'budget'] : undefined
                         }
+                        defaultOpenKeys={['budget']}
+                        selectedKeys={id ? [id] : undefined}
                         onClick={handleMenu}
                         mode="inline"
                         items={items}

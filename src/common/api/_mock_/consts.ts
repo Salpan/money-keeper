@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 import { categoriesList } from '_consts/categoriesList';
 
 export const mockBudgetList: BudgetResponse[] = Array.from(
-    { length: 5 },
+    { length: 4 },
     () => ({
         id: uuidv4(),
         name: faker.finance.transactionType(),
