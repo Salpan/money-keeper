@@ -1,34 +1,13 @@
 import { useStyles } from '_components/layouts/main/styles';
 import { FC } from 'react';
-import { Flex, List, Skeleton, Typography } from 'antd';
+import { List, Skeleton, Typography } from 'antd';
 
 export const Skelet: FC = () => {
     const { styles } = useStyles();
 
     return (
         <div className={styles.budgetConteiner}>
-            <Flex justify="space-between" gap={100}>
-                <Typography.Title level={3}>Бюджет</Typography.Title>
-                <Typography.Title level={4}>
-                    Период: {<Skeleton.Input size="small" active />}
-                </Typography.Title>
-            </Flex>
             <div className={styles.budgetBalance}>
-                <div>
-                    <Typography.Title level={4}>
-                        Начальный капитал:
-                    </Typography.Title>
-                    <p>
-                        {
-                            <Skeleton.Input
-                                style={{ width: '15px' }}
-                                size="small"
-                                active
-                            />
-                        }{' '}
-                        USD
-                    </p>
-                </div>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
                     <p>{<Skeleton.Input size="small" active />} USD</p>
@@ -44,10 +23,7 @@ export const Skelet: FC = () => {
             </div>
             <div className={styles.budgetMain}>
                 <div>
-                    <Skeleton.Image
-                        style={{ width: '600px', height: '600px' }}
-                        active
-                    />
+                    <Skeleton.Image active />
                 </div>
                 <div>
                     <List
@@ -58,7 +34,7 @@ export const Skelet: FC = () => {
                             </Typography.Title>
                         }
                         bordered
-                        style={{ width: '500px', height: '400px' }}
+                        style={{ width: '500px' }}
                         dataSource={[1]}
                         renderItem={() => <Skeleton active />}
                     />

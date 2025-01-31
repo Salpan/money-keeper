@@ -10,11 +10,14 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 export const MainLayout: FC = () => {
     const { styles } = useStyles();
+
     const navigate = useNavigate();
 
     const budget = useUnit($budget);
 
     const budgetList = useUnit($budgetList);
+
+    const { id } = useParams();
 
     useEffect(() => {
         getAllBudgetsEv();
@@ -70,8 +73,6 @@ export const MainLayout: FC = () => {
             label: 'Настройки',
         },
     ];
-
-    const { id } = useParams();
 
     return (
         <div className={styles.wrapper}>
