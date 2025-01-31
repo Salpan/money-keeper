@@ -50,7 +50,7 @@ export const useStyles = createStyles(({ token }) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        width: '100%',
+        width: '70%',
         marginBottom: '20px',
         borderRadius: '10px',
     },
@@ -61,5 +61,8 @@ export const useStyles = createStyles(({ token }) => ({
         width: '100%',
         marginTop: '150px',
         borderRadius: '10px',
+    },
+    numberText: {
+        fontSize: '20px',
     },
 }));

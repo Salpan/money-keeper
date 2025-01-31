@@ -105,8 +105,13 @@ export const BudgetName: FC = () => {
 
     return (
         <div className={styles.budgetConteiner}>
-            <Flex justify="space-between" gap={100}>
-                <Typography.Title level={3}>{budget?.name}</Typography.Title>
+            <Flex
+                justify="space-between"
+                style={{ paddingRight: 45, paddingLeft: 45 }}
+            >
+                <Typography.Title level={3}>
+                    {budget?.name ?? `Бюджет`}
+                </Typography.Title>
                 <Typography.Title level={4}>
                     Период:{' '}
                     {`${dayjs(budget?.period[0]).format(`DD.MM.YYYY`)} - ${dayjs(budget?.period[1]).format(`DD.MM.YYYY`)}`}
@@ -117,23 +122,35 @@ export const BudgetName: FC = () => {
                     <Typography.Title level={4}>
                         Начальный капитал:
                     </Typography.Title>
-                    <p>{budget?.startBudget} USD</p>
+                    <p className={styles.numberText}>
+                        {budget?.startBudget ?? 0} USD
+                    </p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
-                    <p>{Number(balance)} USD</p>
+                    <p className={styles.numberText}>{Number(balance)} USD</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Доходы:</Typography.Title>
-                    <p>
-                        {calculateTransactions(budget?.transactions, 'income')}{' '}
+                    <p className={styles.numberText}>
+                        {budget?.transactions
+                            ? calculateTransactions(
+                                  budget?.transactions,
+                                  'income',
+                              )
+                            : 0}{' '}
                         USD
                     </p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Расходы:</Typography.Title>
-                    <p>
-                        {calculateTransactions(budget?.transactions, 'expense')}{' '}
+                    <p className={styles.numberText}>
+                        {budget?.transactions
+                            ? calculateTransactions(
+                                  budget?.transactions,
+                                  'expense',
+                              )
+                            : 0}{' '}
                         USD
                     </p>
                 </div>

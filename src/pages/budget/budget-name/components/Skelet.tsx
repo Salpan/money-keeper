@@ -7,7 +7,10 @@ export const Skelet: FC = () => {
 
     return (
         <div className={styles.budgetConteiner}>
-            <Flex justify="space-between" gap={100}>
+            <Flex
+                justify="space-between"
+                style={{ paddingRight: 45, paddingLeft: 45 }}
+            >
                 <Typography.Title level={3}>Бюджет</Typography.Title>
                 <Typography.Title level={4}>
                     Период: {<Skeleton.Input size="small" active />}
@@ -21,25 +24,24 @@ export const Skelet: FC = () => {
                     <p>
                         {
                             <Skeleton.Input
-                                style={{ width: '15px' }}
+                                // style={{ width: '15px' }}
                                 size="small"
                                 active
                             />
-                        }{' '}
-                        USD
+                        }
                     </p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>
-                    <p>{<Skeleton.Input size="small" active />} USD</p>
+                    <p>{<Skeleton.Input size="small" active />}</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Доходы:</Typography.Title>
-                    <p>{<Skeleton.Input size="small" active />} USD</p>
+                    <p>{<Skeleton.Input size="small" active />}</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Расходы:</Typography.Title>
-                    <p>{<Skeleton.Input size="small" active />} USD</p>
+                    <p>{<Skeleton.Input size="small" active />}</p>
                 </div>
             </div>
             <div className={styles.budgetMain}>
