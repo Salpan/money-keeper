@@ -1,8 +1,9 @@
+import { TransactionType } from '_enums/TransactionType';
 import { BudgetDefaultDTO } from './budget';
 
 export type ExpenseField = {
     id: string;
-    transaction: 'income' | 'expense';
+    transaction: TransactionType;
     categories: string;
     description?: string;
     amount: number;

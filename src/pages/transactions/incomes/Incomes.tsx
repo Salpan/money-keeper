@@ -1,4 +1,5 @@
 import { rules } from '_consts/rules';
+import { TransactionType } from '_enums/TransactionType';
 import { $budget } from '_models/budget';
 import { addTransactionFx, createTransactionEv } from '_models/transaction';
 import { ExpenseField, TransactionForm } from '_types/transactions';
@@ -22,7 +23,7 @@ export const Incomes: FC = () => {
         console.log(values);
         createTransactionEv({
             ...values,
-            transaction: 'income',
+            transaction: TransactionType.Income,
             amount: Number(values.amount),
         });
     };

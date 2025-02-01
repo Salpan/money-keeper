@@ -30,7 +30,8 @@
             "_consts/*": ["./src/common/consts/*"],
             "_models/*": ["./src/models/*"],
             "_api/*": ["./src/common/api/*"],
-            "_types/*": ["./src/common/types/*"]
+            "_types/*": ["./src/common/types/*"],
+            "_enums/*": ["./src/common/enums/*"]
         }
     },
     "include": ["src"]

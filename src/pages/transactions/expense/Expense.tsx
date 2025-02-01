@@ -14,6 +14,7 @@ import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { ExpenseField, TransactionForm } from '_types/transactions';
 import { addTransactionFx, createTransactionEv } from '_models/transaction';
+import { TransactionType } from '_enums/TransactionType';
 
 export const Expense: FC = () => {
     const budget = useUnit($budget);
@@ -23,7 +24,7 @@ export const Expense: FC = () => {
         console.log(values);
         createTransactionEv({
             ...values,
-            transaction: 'expense',
+            transaction: TransactionType.Expens,
             amount: Number(values.amount),
         });
     };

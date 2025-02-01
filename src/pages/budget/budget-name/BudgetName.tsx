@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { Flex, List, Typography } from 'antd';
 import { TestCategoriesList } from '_consts/testCategoriesList';
-import { Skelet } from './components/Skelet';
 import { BudgetResponse } from '_types/budget';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import dayjs from 'dayjs';
 import { categoriesDictionary } from '_consts/categoriesList';
+import { Transaction } from './components/Transaction';
+import { TransactionType } from '_enums/TransactionType';
+import { transactionConverter } from '../../../common/converters/transactionConverter';
+import { GroupDivider } from './components/GroupDivider';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -48,7 +51,7 @@ export const BudgetName: FC = () => {
 
     const pieData = {
         labels: budget?.transactions
-            ?.filter((i) => i.transaction === 'expense')
+            ?.filter((i) => i.transaction === TransactionType.Expens)
             .map(
                 (transaction) =>
                     categoriesDictionary[transaction.categories]?.name,
@@ -57,7 +60,7 @@ export const BudgetName: FC = () => {
             {
                 label: ' рублей',
                 data: budget?.transactions
-                    ?.filter((i) => i.transaction === 'expense')
+                    ?.filter((i) => i.transaction === TransactionType.Expens)
                     .map((i) => i.amount),
                 backgroundColor: TestCategoriesList.map(
                     (i) => i.backgroundColor,
@@ -99,16 +102,13 @@ export const BudgetName: FC = () => {
 
     const isPending = useUnit(getBudgetByIdFx.pending);
 
-    if (isPending) return <Skelet />;
+    // if (isPending) return <Skelet />;
 
     console.log(budget?.transactions);
 
     return (
         <div className={styles.budgetConteiner}>
-            <Flex
-                justify="space-between"
-                style={{ paddingRight: 45, paddingLeft: 45 }}
-            >
+            <Flex justify="space-between" style={{ padding: '0 45px' }}>
                 <Typography.Title level={3}>
                     {budget?.name ?? `Бюджет`}
                 </Typography.Title>
@@ -168,32 +168,26 @@ export const BudgetName: FC = () => {
                             </Typography.Title>
                         }
                         bordered
-                        style={{ width: '500px' }}
-                        dataSource={budget?.transactions?.map((trans) => ({
-                            ...trans,
-                            key: trans.id,
-                            categories:
-                                categoriesDictionary[trans.categories]?.name,
-                        }))}
-                        renderItem={(i) =>
-                            i.transaction === 'income' ? (
-                                <List.Item>
-                                    <List.Item.Meta
-                                        title={i.categories}
-                                        description={i.description}
-                                    />
-                                    <div>+ {i.amount}</div>
-                                </List.Item>
-                            ) : (
-                                <List.Item>
-                                    <List.Item.Meta
-                                        title={i.categories}
-                                        description={i.description}
-                                    />
-                                    <div>- {i.amount}</div>
-                                </List.Item>
-                            )
-                        }
+                        style={{
+                            width: '500px',
+                            height: '600px',
+                            overflowY: 'scroll',
+                        }}
+                        dataSource={transactionConverter(budget?.transactions)}
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        renderItem={(i: any) => {
+                            if (typeof i === 'string')
+                                return <GroupDivider date={i} />;
+                            return (
+                                <Transaction
+                                    title={i.categories}
+                                    description={i.description}
+                                    value={i.amount}
+                                    type={i.transaction}
+                                    loading={isPending}
+                                />
+                            );
+                        }}
                     />
                 </div>
             </div>
