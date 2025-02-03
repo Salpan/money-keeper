@@ -19,7 +19,7 @@ export type TransactionRequest = {
 } & TransactionForm;
 
 export type TransactionResponse = {
-    budgetId: BudgetDefaultDTO['id'];
+    budgetId?: BudgetDefaultDTO['id'];
 } & Transaction;
 
 export type TransactionForm = Omit<Transaction, 'id'>;

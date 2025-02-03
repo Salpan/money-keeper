@@ -33,7 +33,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)
                     ].value,
-                description: faker.lorem.sentence(),
+                // description: faker.lorem.sentence(),
                 amount: faker.number.int({ min: 500, max: 2500 }),
                 date: faker.date.past().toISOString(),
             },
