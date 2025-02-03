@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import dayjs from 'dayjs';
 import '_models/init';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { StartPage } from '_budget/budget-name/components/StartPage';
 
 dayjs.extend(customParseFormat);
 
@@ -17,6 +18,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={'/*'} element={<MainLayout />}>
+                    <Route path={'/*'} element={<StartPage />} />
                     <Route path={'budget/:id'} element={<BudgetName />} />
                     <Route path={'budget/create'} element={<BudgetCreate />} />
                     <Route

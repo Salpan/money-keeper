@@ -34,7 +34,7 @@ export const useStyles = createStyles(({ token }) => ({
         height: 32,
         color: token.colorTextDescription,
     },
-    noContent: {
+    startPage: {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -64,5 +64,8 @@ export const useStyles = createStyles(({ token }) => ({
     },
     numberText: {
         fontSize: '20px',
+    },
+    transactionAmount: {
+        paddingLeft: '35px',
     },
 }));
