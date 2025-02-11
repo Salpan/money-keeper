@@ -1,7 +1,12 @@
 import { useStyles } from '_components/layouts/main/styles';
 import { FC, useEffect } from 'react';
-import { $budget, getBudgetByIdFx, getBudgetEv } from '../../../models/budget';
-import { useParams } from 'react-router-dom';
+import {
+    $budget,
+    $budgetList,
+    getBudgetByIdFx,
+    getBudgetEv,
+} from '../../../models/budget';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { Flex, List, Typography } from 'antd';
 import { TestCategoriesList } from '_consts/testCategoriesList';
@@ -32,6 +37,10 @@ const calculateTransactions = (
 };
 
 export const BudgetName: FC = () => {
+    const navigate = useNavigate();
+
+    const budgetList = useUnit($budgetList);
+
     const budget = useUnit($budget);
 
     console.log(budget?.transactions);
@@ -105,6 +114,13 @@ export const BudgetName: FC = () => {
     // if (isPending) return <Skelet />;
 
     console.log(budget?.transactions);
+
+    const budgetId = budgetList.find((budget) => budget.id === id);
+
+    if (!budgetId) {
+        navigate(`/budget/${id}/404`);
+        return null;
+    }
 
     return (
         <div className={styles.budgetConteiner}>
