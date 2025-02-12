@@ -137,15 +137,19 @@ export const BudgetName: FC = () => {
             </div>
             <div className={styles.budgetMain}>
                 <div>
-                    <div className={styles.budgetButtons}>
+                    <div className={styles.chartsBtnContainer}>
                         <Button
-                            type="primary"
+                            className={styles.chartsButton}
                             onClick={() => setActiveChart('Pie')}
-                        />
+                        >
+                            Рассходы
+                        </Button>
                         <Button
-                            type="primary"
+                            className={styles.chartsButton}
                             onClick={() => setActiveChart('Line')}
-                        />
+                        >
+                            Рассходы и доходы
+                        </Button>
                     </div>
                     <div className={styles.budgetPieChart}>{renderChart()}</div>
                 </div>

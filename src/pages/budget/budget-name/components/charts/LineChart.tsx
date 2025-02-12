@@ -13,8 +13,6 @@ import {
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { TransactionType } from '_enums/TransactionType';
-import { categoriesDictionary } from '_consts/categoriesList';
-import { TestCategoriesList } from '_consts/testCategoriesList';
 
 ChartJS.register(
     CategoryScale,
@@ -26,19 +24,29 @@ ChartJS.register(
     Legend,
 );
 
+const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
+
 export const LineChart: FC = () => {
     const budget = useUnit($budget);
 
     const data = {
-        labels: budget?.transactions
-            ?.filter((i) => i.transaction === TransactionType.Expens)
-            .map(
-                (transaction) =>
-                    categoriesDictionary[transaction.categories]?.name,
-            ),
+        labels: months,
         datasets: [
             {
-                label: ' рублей',
+                label: 'Расходы',
                 data: budget?.transactions
                     ?.filter((i) => i.transaction === TransactionType.Expens)
                     .map((i) => i.amount),
@@ -47,14 +55,12 @@ export const LineChart: FC = () => {
                 borderWidth: 4,
             },
             {
-                label: ' рублей',
+                label: 'Доходы',
                 data: budget?.transactions
                     ?.filter((i) => i.transaction === TransactionType.Income)
                     .map((i) => i.amount),
-                backgroundColor: TestCategoriesList.map(
-                    (i) => i.backgroundColor,
-                ),
-                borderColor: TestCategoriesList.map((i) => i.borderColor),
+                borderColor: 'rgb(53, 162, 235)',
+                backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 borderWidth: 4,
             },
         ],
@@ -65,14 +71,14 @@ export const LineChart: FC = () => {
         plugins: {
             legend: {
                 position: 'top' as const,
-                align: 'start' as const,
+                align: 'center' as const,
                 labels: {
                     padding: 15,
                     usePointStyle: true,
                 },
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Test categories',
                 position: 'top' as const,
                 padding: 1,

@@ -68,8 +68,14 @@ export const useStyles = createStyles(({ token }) => ({
     transactionAmount: {
         paddingLeft: '35px',
     },
-    budgetButtons: {
+    chartsBtnContainer: {
         display: 'flex',
+        gap: '20px',
+        justifyContent: 'center',
+    },
+    chartsButton: {
+        // width: '100px',
+        // height: '20px',
     },
     budgetPieChart: {
         width: '600px',
