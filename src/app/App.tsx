@@ -20,7 +20,6 @@ function App() {
             <Routes>
                 <Route path={'/*'} element={<MainLayout />}>
                     <Route path={'/*'} element={<StartPage />} />
-                    {/* <Route path={'budget/:id'} element={<BudgetPlug />} /> */}
                     <Route path={'budget/:id'} element={<BudgetName />} />
                     <Route path={'budget/create'} element={<BudgetCreate />} />
                     <Route
@@ -34,6 +33,7 @@ function App() {
                     <Route path={'analytics'} element={<Analytics />} />
                     <Route path={'settings'} element={<Settings />} />
                     <Route path={'budget/:id/404'} element={<NotFound />} />
+                    <Route path={'*'} element={<NotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -68,4 +68,11 @@ export const useStyles = createStyles(({ token }) => ({
     transactionAmount: {
         paddingLeft: '35px',
     },
+    budgetButtons: {
+        display: 'flex',
+    },
+    budgetPieChart: {
+        width: '600px',
+        height: '100%',
+    },
 }));

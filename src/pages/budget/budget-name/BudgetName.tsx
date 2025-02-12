@@ -1,5 +1,5 @@
 import { useStyles } from '_components/layouts/main/styles';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
     $budget,
     $budgetList,
@@ -8,17 +8,15 @@ import {
 } from '../../../models/budget';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
-import { Flex, List, Typography } from 'antd';
-import { TestCategoriesList } from '_consts/testCategoriesList';
+import { Button, Flex, List, Typography } from 'antd';
 import { BudgetResponse } from '_types/budget';
-import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import dayjs from 'dayjs';
-import { categoriesDictionary } from '_consts/categoriesList';
 import { Transaction } from './components/Transaction';
-import { TransactionType } from '_enums/TransactionType';
 import { transactionConverter } from '../../../common/converters/transactionConverter';
 import { GroupDivider } from './components/GroupDivider';
+import { PieChart } from './components/charts/PieChart';
+import { LineChart } from './components/charts/LineChart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -58,48 +56,6 @@ export const BudgetName: FC = () => {
 
     console.log({ balance });
 
-    const pieData = {
-        labels: budget?.transactions
-            ?.filter((i) => i.transaction === TransactionType.Expens)
-            .map(
-                (transaction) =>
-                    categoriesDictionary[transaction.categories]?.name,
-            ),
-        datasets: [
-            {
-                label: ' рублей',
-                data: budget?.transactions
-                    ?.filter((i) => i.transaction === TransactionType.Expens)
-                    .map((i) => i.amount),
-                backgroundColor: TestCategoriesList.map(
-                    (i) => i.backgroundColor,
-                ),
-                borderColor: TestCategoriesList.map((i) => i.borderColor),
-                borderWidth: 4,
-            },
-        ],
-    };
-
-    const pieConfig = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top' as const,
-                align: 'start' as const,
-                labels: {
-                    padding: 15,
-                    usePointStyle: true,
-                },
-            },
-            title: {
-                display: true,
-                text: 'Test categories',
-                position: 'top' as const,
-                padding: 1,
-            },
-        },
-    };
-
     const { styles } = useStyles();
     const { id } = useParams();
 
@@ -119,8 +75,16 @@ export const BudgetName: FC = () => {
 
     if (!budgetId) {
         navigate(`/budget/${id}/404`);
-        return null;
     }
+
+    const [activeChart, setActiveChart] = useState('Pie');
+
+    const renderChart = () => {
+        if (activeChart === 'Pie') {
+            return <PieChart />;
+        }
+        return <LineChart />;
+    };
 
     return (
         <div className={styles.budgetConteiner}>
@@ -172,8 +136,18 @@ export const BudgetName: FC = () => {
                 </div>
             </div>
             <div className={styles.budgetMain}>
-                <div style={{ width: '600px', height: '100%' }}>
-                    <Pie data={pieData} options={pieConfig} />
+                <div>
+                    <div className={styles.budgetButtons}>
+                        <Button
+                            type="primary"
+                            onClick={() => setActiveChart('Pie')}
+                        />
+                        <Button
+                            type="primary"
+                            onClick={() => setActiveChart('Line')}
+                        />
+                    </div>
+                    <div className={styles.budgetPieChart}>{renderChart()}</div>
                 </div>
                 <div>
                     <List
