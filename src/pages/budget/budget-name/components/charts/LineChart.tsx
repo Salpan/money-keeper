@@ -13,6 +13,9 @@ import {
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { TransactionType } from '_enums/TransactionType';
+import { transactionConverter } from '_converters/transactionConverter';
+import dayjs from 'dayjs';
+import { Transaction } from '_types/transactions';
 
 ChartJS.register(
     CategoryScale,
@@ -24,26 +27,30 @@ ChartJS.register(
     Legend,
 );
 
-const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
+// const months = [
+//     'January',
+//     'February',
+//     'March',
+//     'April',
+//     'May',
+//     'June',
+//     'July',
+//     'August',
+//     'September',
+//     'October',
+//     'November',
+//     'December',
+// ];
 
 export const LineChart: FC = () => {
     const budget = useUnit($budget);
 
+    const sortedDate = transactionConverter(budget?.transactions)
+        .filter((i: string | Transaction) => typeof i === 'string')
+        .map((i: string) => dayjs(i).format('DD MMMM'));
+
     const data = {
-        labels: months,
+        labels: sortedDate,
         datasets: [
             {
                 label: 'Расходы',
@@ -79,7 +86,7 @@ export const LineChart: FC = () => {
             },
             title: {
                 display: false,
-                text: 'Test categories',
+                text: 'Расходы и доходы',
                 position: 'top' as const,
                 padding: 1,
             },

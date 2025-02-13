@@ -17,6 +17,7 @@ import { transactionConverter } from '../../../common/converters/transactionConv
 import { GroupDivider } from './components/GroupDivider';
 import { PieChart } from './components/charts/PieChart';
 import { LineChart } from './components/charts/LineChart';
+import { RenderTransaction } from '_types/transactions';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -168,8 +169,7 @@ export const BudgetName: FC = () => {
                             overflowY: 'scroll',
                         }}
                         dataSource={transactionConverter(budget?.transactions)}
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        renderItem={(i: any) => {
+                        renderItem={(i: RenderTransaction) => {
                             if (typeof i === 'string')
                                 return <GroupDivider date={i} />;
                             return (

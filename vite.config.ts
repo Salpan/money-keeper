@@ -15,6 +15,7 @@ export default defineConfig({
             _api: '/src/common/api',
             _types: '/src/common/types',
             _enums: '/src/common/enums',
+            _converters: '/src/common/converters',
         },
     },
     plugins: [react()],

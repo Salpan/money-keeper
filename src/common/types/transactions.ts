@@ -10,6 +10,13 @@ export type ExpenseField = {
     date: string;
 };
 
+export type RenderTransaction = {
+    categories: string;
+    description: string;
+    amount: number;
+    transaction: TransactionType;
+};
+
 export type IncomeField = Omit<ExpenseField, 'description'>;
 
 export type Transaction = ExpenseField | IncomeField;
