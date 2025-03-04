@@ -1,9 +1,10 @@
-import { Space, Table } from 'antd';
+import { Table } from 'antd';
 import type { TableProps } from 'antd';
 import { useUnit } from 'effector-react';
 import { $budgetList } from '_models/budget';
 import { FC } from 'react';
 import { useStyles } from '_components/layouts/main/styles';
+import dayjs from 'dayjs';
 
 type DataType = {
     key: string;
@@ -16,31 +17,31 @@ export const StartPage: FC = () => {
 
     const columns: TableProps<DataType>['columns'] = [
         {
-            title: 'Name',
+            title: 'Бюджет',
             dataIndex: 'name',
             key: 'name',
             render: (text) => <a>{text}</a>,
         },
         {
-            title: 'Balance',
+            title: 'Баланс',
             dataIndex: 'balance',
             key: 'balance',
         },
         {
-            title: 'Date',
+            title: 'Дата создания',
             dataIndex: 'date',
             key: 'date',
         },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <a>Invite {record.name}</a>
-                    <a>Delete</a>
-                </Space>
-            ),
-        },
+        // {
+        //     title: 'Action',
+        //     key: 'action',
+        //     render: (_, record) => (
+        //         <Space size="middle">
+        //             <a>Invite {record.name}</a>
+        //             <a>Delete</a>
+        //         </Space>
+        //     ),
+        // },
     ];
 
     const budgetList = useUnit($budgetList);
@@ -50,7 +51,7 @@ export const StartPage: FC = () => {
             key: budget.id,
             name: budget.name,
             // balance: budget.balance,
-            date: budget.createdAt,
+            date: dayjs(budget?.createdAt).format(`DD.MM.YYYY`),
         };
     });
 
