@@ -1,11 +1,5 @@
 import { useStyles } from '_components/layouts/main/styles';
 import { FC, useEffect, useState } from 'react';
-import {
-    $budget,
-    $budgetList,
-    getBudgetByIdFx,
-    getBudgetEv,
-} from '../../../models/budget';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useUnit } from 'effector-react';
 import { Button, Flex, List, Typography } from 'antd';
@@ -13,11 +7,17 @@ import { BudgetResponse } from '_types/budget';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import dayjs from 'dayjs';
 import { Transaction } from './components/Transaction';
-import { transactionConverter } from '../../../common/converters/transactionConverter';
 import { GroupDivider } from './components/GroupDivider';
 import { PieChart } from './components/charts/PieChart';
 import { LineChart } from './components/charts/LineChart';
 import { RenderTransaction } from '_types/transactions';
+import { transactionConverter } from '_converters/transactionConverter';
+import {
+    $budget,
+    $budgetList,
+    getBudgetByIdFx,
+    getBudgetEv,
+} from '_models/budget';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
