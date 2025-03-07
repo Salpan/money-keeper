@@ -49,7 +49,7 @@ export const MainLayout: FC = () => {
                     label: 'Создать бюджет',
                 },
                 {
-                    key: 'budgetList',
+                    key: 'list',
                     label: 'Список бюджетов',
                 },
             ],
