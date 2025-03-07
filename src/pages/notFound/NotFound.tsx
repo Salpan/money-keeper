@@ -13,7 +13,7 @@ export const NotFound: FC = () => {
     };
 
     const budgetListButton = () => {
-        navigate('/budget/list');
+        navigate('');
     };
 
     return (

@@ -19,7 +19,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={'/*'} element={<MainLayout />}>
-                    <Route path={'budget/list'} element={<StartPage />} />
+                    <Route path={'/*'} element={<StartPage />} />
                     <Route path={'budget/:id'} element={<BudgetName />} />
                     <Route path={'budget/create'} element={<BudgetCreate />} />
                     <Route
