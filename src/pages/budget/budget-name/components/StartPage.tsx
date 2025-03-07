@@ -2,9 +2,10 @@ import { Table } from 'antd';
 import type { TableProps } from 'antd';
 import { useUnit } from 'effector-react';
 import { $budgetList } from '_models/budget';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { useStyles } from '_components/layouts/main/styles';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 type DataType = {
     key: string;
@@ -14,6 +15,7 @@ type DataType = {
 
 export const StartPage: FC = () => {
     const { styles } = useStyles();
+    const navigate = useNavigate();
 
     const columns: TableProps<DataType>['columns'] = [
         {
@@ -44,6 +46,13 @@ export const StartPage: FC = () => {
         // },
     ];
 
+    const rowClickHandler = useCallback(
+        (id: string[]) => () => {
+            navigate(`/budget/${id}`);
+        },
+        [navigate],
+    );
+
     const budgetList = useUnit($budgetList);
 
     const budgetListTable: DataType[] = budgetList.map((budget) => {
@@ -55,8 +64,13 @@ export const StartPage: FC = () => {
         };
     });
 
+    const budgetId = budgetListTable.map(({ key }) => key);
+
     return (
         <Table<DataType>
+            onRow={(i) => ({
+                onClick: rowClickHandler(budgetId.filter((id) => id === i.key)),
+            })}
             className={styles.startPage}
             columns={columns}
             dataSource={budgetListTable}
