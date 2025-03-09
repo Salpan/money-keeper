@@ -48,7 +48,7 @@ export const StartPage: FC = () => {
     ];
 
     const rowClickHandler = useCallback(
-        (id: string[]) => () => {
+        (id: string) => () => {
             navigate(`/budget/${id}`);
         },
         [navigate],
@@ -65,16 +65,12 @@ export const StartPage: FC = () => {
         };
     });
 
-    const budgetId = budgetListTable.map(({ key }) => key);
-
     return (
         <div className={styles.startPage}>
             {budgetListTable.length > 0 ? (
                 <Table<DataType>
                     onRow={(i) => ({
-                        onClick: rowClickHandler(
-                            budgetId.filter((id) => id === i.key),
-                        ),
+                        onClick: rowClickHandler(i.key),
                     })}
                     columns={columns}
                     dataSource={budgetListTable}
