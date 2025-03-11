@@ -27,36 +27,52 @@ ChartJS.register(
     Legend,
 );
 
-// const months = [
-//     'January',
-//     'February',
-//     'March',
-//     'April',
-//     'May',
-//     'June',
-//     'July',
-//     'August',
-//     'September',
-//     'October',
-//     'November',
-//     'December',
-// ];
+const months = [
+    { month: 'January', amount: 0 },
+    { month: 'February', amount: 0 },
+    { month: 'March', amount: 0 },
+    { month: 'April', amount: 0 },
+    { month: 'May', amount: 0 },
+    { month: 'June', amount: 0 },
+    { month: 'July', amount: 0 },
+    { month: 'August', amount: 0 },
+    { month: 'September', amount: 0 },
+    { month: 'October', amount: 0 },
+    { month: 'November', amount: 0 },
+    { month: 'December', amount: 0 },
+];
 
 export const LineChart: FC = () => {
     const budget = useUnit($budget);
 
     const sortedDate = transactionConverter(budget?.transactions)
         .filter((i: string | Transaction) => typeof i === 'string')
-        .map((i: string) => dayjs(i).format('DD MMMM'));
+        .map((i: string) => dayjs(i).format('DD MMMM YYYY'));
+
+    console.log('DATE', sortedDate);
+
+    const newArray = budget?.transactions?.map(({ date, amount }) => ({
+        date: dayjs(date).format('MMMM'),
+        amount,
+    }));
+
+    const updatedMonths = months.map((month) => {
+        if (newArray) {
+            const totalAmount = newArray
+                .filter((newArray) => newArray.date === month.month)
+                .reduce((sum, trans) => sum + trans.amount, 0);
+            return { ...month, amount: totalAmount };
+        } else {
+            return { ...month, amount: 0 };
+        }
+    });
 
     const data = {
-        labels: sortedDate,
+        labels: months.map((month) => month.month),
         datasets: [
             {
                 label: 'Расходы',
-                data: budget?.transactions
-                    ?.filter((i) => i.transaction === TransactionType.Expens)
-                    .map((i) => i.amount),
+                data: updatedMonths.map((i) => i.amount),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderWidth: 4,

@@ -13,5 +13,5 @@ export const GroupDivider: FC<GroupDividerProps> = ({ date }) => {
         return null;
     }
 
-    return <List.Item>{dayjs(date).format('DD MMMM')}</List.Item>;
+    return <List.Item>{dayjs(date).format('DD MMMM YYYY')}</List.Item>;
 };
