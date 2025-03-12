@@ -7,7 +7,7 @@ export type Categories = {
 
 export const categoriesList: Categories[] = [
     {
-        value: 'transfer',
+        value: 'transfer btw persons',
         name: 'Переводы людям',
     },
     {
@@ -61,6 +61,14 @@ export const categoriesList: Categories[] = [
     {
         value: 'taxi',
         name: 'Такси',
+    },
+    {
+        value: 'cash',
+        name: 'Наличные',
+    },
+    {
+        value: 'transfer',
+        name: 'Перевод',
     },
 ];
 

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { faker } from '@faker-js/faker';
 import { categoriesList } from '_consts/categoriesList';
 import { TransactionType } from '_enums/TransactionType';
+import { methodList } from '_consts/methodList';
 
 export const mockBudgetList: BudgetResponse[] = Array.from(
     { length: 4 },
@@ -30,9 +31,8 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
                 id: uuidv4(),
                 transaction: TransactionType.Income,
                 categories:
-                    categoriesList[
-                        Math.floor(Math.random() * categoriesList.length)
-                    ].value,
+                    methodList[Math.floor(Math.random() * methodList.length)]
+                        .value,
                 // description: faker.lorem.sentence(),
                 amount: faker.number.int({ min: 500, max: 2500 }),
                 date: faker.date.past().toISOString(),

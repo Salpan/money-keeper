@@ -49,6 +49,12 @@ export const Expense: FC = () => {
                 >
                     <Select>
                         {categoriesList
+                            .filter((category) => {
+                                return (
+                                    category.value !== 'cash' &&
+                                    category.value !== 'transfer'
+                                );
+                            })
                             .sort((a, b) => (a.name > b.name ? 1 : -1))
                             .map((category, index) => {
                                 return (

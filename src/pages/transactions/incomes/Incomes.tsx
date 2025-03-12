@@ -20,11 +20,12 @@ export const Incomes: FC = () => {
     const isPending = useUnit(addTransactionFx.pending);
 
     const finishHandler = (values: TransactionForm) => {
-        console.log(values);
+        console.log('Приход', values);
         createTransactionEv({
             ...values,
             transaction: TransactionType.Income,
             amount: Number(values.amount),
+            categories: values.categories,
         });
     };
     return (
