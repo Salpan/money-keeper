@@ -13,9 +13,7 @@ import {
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { TransactionType } from '_enums/TransactionType';
-import { transactionConverter } from '_converters/transactionConverter';
 import dayjs from 'dayjs';
-import { Transaction } from '_types/transactions';
 
 ChartJS.register(
     CategoryScale,
@@ -27,7 +25,7 @@ ChartJS.register(
     Legend,
 );
 
-const months = [
+const monthsData = [
     { month: 'January', amount: 0 },
     { month: 'February', amount: 0 },
     { month: 'March', amount: 0 },
@@ -45,43 +43,63 @@ const months = [
 export const LineChart: FC = () => {
     const budget = useUnit($budget);
 
-    const sortedDate = transactionConverter(budget?.transactions)
-        .filter((i: string | Transaction) => typeof i === 'string')
-        .map((i: string) => dayjs(i).format('DD MMMM YYYY'));
+    const transactions = budget?.transactions?.map(
+        ({ date, amount, transaction }) => ({
+            date: dayjs(date).format('MMMM'),
+            amount,
+            transaction,
+        }),
+    );
 
-    console.log('DATE', sortedDate);
+    const amountDataExpense = monthsData
+        .map((month) => {
+            if (transactions) {
+                const totalAmount = transactions
+                    .filter(
+                        (trans) => trans.transaction === TransactionType.Expens,
+                    )
+                    .filter((trans) => trans.date === month.month)
+                    .reduce((acc, trans) => {
+                        return acc + trans.amount;
+                    }, 0);
+                return { ...month, amount: totalAmount };
+            } else {
+                return { ...month, amount: 0 };
+            }
+        })
+        .map((month) => month.amount);
 
-    const newArray = budget?.transactions?.map(({ date, amount }) => ({
-        date: dayjs(date).format('MMMM'),
-        amount,
-    }));
-
-    const updatedMonths = months.map((month) => {
-        if (newArray) {
-            const totalAmount = newArray
-                .filter((newArray) => newArray.date === month.month)
-                .reduce((sum, trans) => sum + trans.amount, 0);
-            return { ...month, amount: totalAmount };
-        } else {
-            return { ...month, amount: 0 };
-        }
-    });
+    const amountDataIncomes = monthsData
+        .map((month) => {
+            if (transactions) {
+                const totalAmount = transactions
+                    .filter(
+                        (trans) => trans.transaction === TransactionType.Income,
+                    )
+                    .filter((trans) => trans.date === month.month)
+                    .reduce((acc, trans) => {
+                        return acc + trans.amount;
+                    }, 0);
+                return { ...month, amount: totalAmount };
+            } else {
+                return { ...month, amount: 0 };
+            }
+        })
+        .map((month) => month.amount);
 
     const data = {
-        labels: months.map((month) => month.month),
+        labels: monthsData.map((month) => month.month),
         datasets: [
             {
                 label: 'Расходы',
-                data: updatedMonths.map((i) => i.amount),
+                data: amountDataExpense,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderWidth: 4,
             },
             {
                 label: 'Доходы',
-                data: budget?.transactions
-                    ?.filter((i) => i.transaction === TransactionType.Income)
-                    .map((i) => i.amount),
+                data: amountDataIncomes,
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
                 borderWidth: 4,
