@@ -14,6 +14,7 @@ import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { TransactionType } from '_enums/TransactionType';
 import dayjs from 'dayjs';
+import { monthsData } from '_consts/monthsData';
 
 ChartJS.register(
     CategoryScale,
@@ -24,21 +25,6 @@ ChartJS.register(
     Tooltip,
     Legend,
 );
-
-const monthsData = [
-    { month: 'January', amount: 0 },
-    { month: 'February', amount: 0 },
-    { month: 'March', amount: 0 },
-    { month: 'April', amount: 0 },
-    { month: 'May', amount: 0 },
-    { month: 'June', amount: 0 },
-    { month: 'July', amount: 0 },
-    { month: 'August', amount: 0 },
-    { month: 'September', amount: 0 },
-    { month: 'October', amount: 0 },
-    { month: 'November', amount: 0 },
-    { month: 'December', amount: 0 },
-];
 
 export const LineChart: FC = () => {
     const budget = useUnit($budget);
@@ -56,7 +42,8 @@ export const LineChart: FC = () => {
             if (transactions) {
                 const totalAmount = transactions
                     .filter(
-                        (trans) => trans.transaction === TransactionType.Expens,
+                        (trans) =>
+                            trans.transaction === TransactionType.Expense,
                     )
                     .filter((trans) => trans.date === month.month)
                     .reduce((acc, trans) => {

@@ -14,7 +14,7 @@ export const PieChart: FC = () => {
 
     const data = {
         labels: budget?.transactions
-            ?.filter((i) => i.transaction === TransactionType.Expens)
+            ?.filter((i) => i.transaction === TransactionType.Expense)
             .map(
                 (transaction) =>
                     categoriesDictionary[transaction.categories]?.name,
@@ -23,7 +23,7 @@ export const PieChart: FC = () => {
             {
                 label: ' рублей',
                 data: budget?.transactions
-                    ?.filter((i) => i.transaction === TransactionType.Expens)
+                    ?.filter((i) => i.transaction === TransactionType.Expense)
                     .map((i) => i.amount),
                 backgroundColor: TestCategoriesList.map(
                     (i) => i.backgroundColor,
