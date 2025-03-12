@@ -17,7 +17,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
         transactions: [
             {
                 id: uuidv4(),
-                transaction: TransactionType.Expens,
+                transaction: TransactionType.Expense,
                 categories:
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)
@@ -39,7 +39,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
             },
             {
                 id: uuidv4(),
-                transaction: TransactionType.Expens,
+                transaction: TransactionType.Expense,
                 categories:
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)
@@ -50,7 +50,7 @@ export const mockBudgetList: BudgetResponse[] = Array.from(
             },
             {
                 id: uuidv4(),
-                transaction: TransactionType.Expens,
+                transaction: TransactionType.Expense,
                 categories:
                     categoriesList[
                         Math.floor(Math.random() * categoriesList.length)

@@ -12,9 +12,9 @@ import {
 } from 'chart.js';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
-import { TransactionType } from '_enums/TransactionType';
 import dayjs from 'dayjs';
 import { monthsData } from '_consts/monthsData';
+import { TransactionType } from '_enums/TransactionType';
 
 ChartJS.register(
     CategoryScale,

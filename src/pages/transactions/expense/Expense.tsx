@@ -24,7 +24,7 @@ export const Expense: FC = () => {
         console.log(values);
         createTransactionEv({
             ...values,
-            transaction: TransactionType.Expens,
+            transaction: TransactionType.Expense,
             amount: Number(values.amount),
         });
     };
