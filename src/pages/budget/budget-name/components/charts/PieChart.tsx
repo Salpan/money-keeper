@@ -52,5 +52,4 @@ export const PieChart: FC = () => {
     };
 
     return <Doughnut data={data} options={options} />;
-    // return <Pie data={data} options={options} />;
 };
