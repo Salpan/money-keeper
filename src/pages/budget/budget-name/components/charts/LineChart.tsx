@@ -9,6 +9,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    scales,
 } from 'chart.js';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
@@ -24,6 +25,7 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
+    scales,
 );
 
 export const LineChart: FC = () => {
@@ -82,14 +84,16 @@ export const LineChart: FC = () => {
                 data: amountDataExpense,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderWidth: 4,
+                borderWidth: 3,
+                tension: 0.5,
             },
             {
                 label: 'Доходы',
                 data: amountDataIncomes,
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                borderWidth: 4,
+                borderWidth: 3,
+                tension: 0.5,
             },
         ],
     };

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
@@ -54,5 +54,6 @@ export const PieChart: FC = () => {
         },
     };
 
-    return <Pie data={data} options={options} />;
+    return <Doughnut data={data} options={options} />;
+    // return <Pie data={data} options={options} />;
 };
