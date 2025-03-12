@@ -4,8 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { useUnit } from 'effector-react';
 import { $budget } from '_models/budget';
 import { TransactionType } from '_enums/TransactionType';
-import { categoriesDictionary } from '_consts/categoriesList';
-import { TestCategoriesList } from '_consts/testCategoriesList';
+import { categoriesDictionary, categoriesList } from '_consts/categoriesList';
 
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
@@ -25,10 +24,8 @@ export const PieChart: FC = () => {
                 data: budget?.transactions
                     ?.filter((i) => i.transaction === TransactionType.Expense)
                     .map((i) => i.amount),
-                backgroundColor: TestCategoriesList.map(
-                    (i) => i.backgroundColor,
-                ),
-                borderColor: TestCategoriesList.map((i) => i.borderColor),
+                backgroundColor: categoriesList.map((i) => i.backgroundColor),
+                borderColor: categoriesList.map((i) => i.borderColor),
                 borderWidth: 4,
             },
         ],
