@@ -39,42 +39,29 @@ export const LineChart: FC = () => {
         }),
     );
 
-    const amountDataExpense = monthsData
-        .map((month) => {
-            if (transactions) {
-                const totalAmount = transactions
-                    .filter(
-                        (trans) =>
-                            trans.transaction === TransactionType.Expense,
-                    )
-                    .filter((trans) => trans.date === month.month)
-                    .reduce((acc, trans) => {
-                        return acc + trans.amount;
-                    }, 0);
-                return { ...month, amount: totalAmount };
-            } else {
-                return { ...month, amount: 0 };
-            }
-        })
-        .map((month) => month.amount);
+    const amountDataExpense = monthsData.map((month) => {
+        if (transactions) {
+            return transactions
+                .filter(
+                    (trans) => trans.transaction === TransactionType.Expense,
+                )
+                .filter((trans) => trans.date === month.month)
+                .reduce((acc, trans) => acc + trans.amount, 0);
+        } else {
+            return 0;
+        }
+    });
 
-    const amountDataIncomes = monthsData
-        .map((month) => {
-            if (transactions) {
-                const totalAmount = transactions
-                    .filter(
-                        (trans) => trans.transaction === TransactionType.Income,
-                    )
-                    .filter((trans) => trans.date === month.month)
-                    .reduce((acc, trans) => {
-                        return acc + trans.amount;
-                    }, 0);
-                return { ...month, amount: totalAmount };
-            } else {
-                return { ...month, amount: 0 };
-            }
-        })
-        .map((month) => month.amount);
+    const amountDataIncomes = monthsData.map((month) => {
+        if (transactions) {
+            return transactions
+                .filter((trans) => trans.transaction === TransactionType.Income)
+                .filter((trans) => trans.date === month.month)
+                .reduce((acc, trans) => acc + trans.amount, 0);
+        } else {
+            return 0;
+        }
+    });
 
     const data = {
         labels: monthsData.map((month) => month.month),
@@ -84,16 +71,16 @@ export const LineChart: FC = () => {
                 data: amountDataExpense,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                borderWidth: 3,
-                tension: 0.5,
+                borderWidth: 2.5,
+                tension: 0.4,
             },
             {
                 label: 'Доходы',
                 data: amountDataIncomes,
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                borderWidth: 3,
-                tension: 0.5,
+                borderWidth: 2.5,
+                tension: 0.4,
             },
         ],
     };
