@@ -43,24 +43,26 @@ export const LineChart: FC = () => {
         if (transactions) {
             return transactions
                 .filter(
-                    (trans) => trans.transaction === TransactionType.Expense,
+                    (trans) =>
+                        trans.transaction === TransactionType.Expense &&
+                        trans.date === month.month,
                 )
-                .filter((trans) => trans.date === month.month)
                 .reduce((acc, trans) => acc + trans.amount, 0);
-        } else {
-            return 0;
         }
+        return 0;
     });
 
     const amountDataIncomes = monthsData.map((month) => {
         if (transactions) {
             return transactions
-                .filter((trans) => trans.transaction === TransactionType.Income)
-                .filter((trans) => trans.date === month.month)
+                .filter(
+                    (trans) =>
+                        trans.transaction === TransactionType.Income &&
+                        trans.date === month.month,
+                )
                 .reduce((acc, trans) => acc + trans.amount, 0);
-        } else {
-            return 0;
         }
+        return 0;
     });
 
     const data = {
