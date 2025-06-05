@@ -1,14 +1,36 @@
-import { FC } from 'react';
-
-import { useStyles } from './styles';
+import { FC, useEffect } from 'react';
 import { Menu, type MenuProps, Typography } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useStyles } from './styles';
+import { useUnit } from 'effector-react';
+import { $budget, $budgetList, getAllBudgetsEv } from '_models/budget';
+import { setNavigateEv } from '_models/navigation';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export const MainLayout: FC = () => {
     const { styles } = useStyles();
+
     const navigate = useNavigate();
+
+    const budget = useUnit($budget);
+
+    const budgetList = useUnit($budgetList);
+
+    const { id } = useParams();
+
+    useEffect(() => {
+        getAllBudgetsEv();
+    }, []);
+
+    useEffect(() => {
+        setNavigateEv(navigate);
+    }, [navigate]);
+
+    const budgetMenuItems = budgetList.map(({ id, name }) => ({
+        key: id,
+        label: name,
+    }));
 
     const handleMenu: MenuProps['onClick'] = (e) => {
         console.log('click ', e);
@@ -19,12 +41,9 @@ export const MainLayout: FC = () => {
     const items: MenuItem[] = [
         {
             key: 'budget',
-            label: 'Бюджет',
+            label: 'Бюджеты',
             children: [
-                {
-                    key: 'budgetName',
-                    label: 'Budget1',
-                },
+                ...budgetMenuItems,
                 {
                     key: 'create',
                     label: 'Создать бюджет',
@@ -32,26 +51,22 @@ export const MainLayout: FC = () => {
             ],
         },
         {
-            key: 'trans',
+            key: 'transactions',
             label: 'Транзакции',
             children: [
                 {
-                    key: 'rashodi',
+                    key: 'expense',
                     label: 'Расходы',
                 },
                 {
-                    key: 'popolnenie',
+                    key: 'incomes',
                     label: 'Пополнение',
                 },
             ],
         },
         {
-            key: 'analitic',
-            label: 'Аналитика',
-        },
-        {
-            key: 'settings',
-            label: 'Настройки',
+            key: '',
+            label: 'Список бюджетов',
         },
     ];
 
@@ -63,6 +78,11 @@ export const MainLayout: FC = () => {
             <main className={styles.main}>
                 <section>
                     <Menu
+                        defaultSelectedKeys={
+                            budget?.id ? [budget.id, 'budget'] : undefined
+                        }
+                        defaultOpenKeys={['budget']}
+                        selectedKeys={id ? [id] : undefined}
                         onClick={handleMenu}
                         mode="inline"
                         items={items}
