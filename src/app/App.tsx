@@ -1,8 +1,6 @@
-import { Analytics } from '_analytics/Analytics';
 import { BudgetCreate } from '_budget/budget-create/BudgetCreate';
 import { BudgetName } from '_budget/budget-name/BudgetName';
 import { MainLayout } from '_components/layouts/main';
-import { Settings } from '_settings/Settings';
 import { Expense } from '_transactions/expense/Expense';
 import { Incomes } from '_transactions/incomes/Incomes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -30,8 +28,6 @@ function App() {
                         path={'transactions/incomes'}
                         element={<Incomes />}
                     />
-                    <Route path={'analytics'} element={<Analytics />} />
-                    <Route path={'settings'} element={<Settings />} />
                     <Route path={'budget/:id/404'} element={<NotFound />} />
                     <Route path={'*'} element={<NotFound />} />
                 </Route>

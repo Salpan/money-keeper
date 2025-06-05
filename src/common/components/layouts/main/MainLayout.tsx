@@ -65,14 +65,6 @@ export const MainLayout: FC = () => {
             ],
         },
         {
-            key: 'analytics',
-            label: 'Аналитика',
-        },
-        {
-            key: 'settings',
-            label: 'Настройки',
-        },
-        {
             key: '',
             label: 'Список бюджетов',
         },

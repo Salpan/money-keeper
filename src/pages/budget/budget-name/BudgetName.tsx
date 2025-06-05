@@ -95,7 +95,7 @@ export const BudgetName: FC = () => {
                 </Typography.Title>
                 <Typography.Title level={4}>
                     Период:{' '}
-                    {`${dayjs(budget?.period[0]).format(`DD.MM.YYYY`)} - ${dayjs(budget?.period[1]).format(`DD.MM.YYYY`)}`}
+                    {`${dayjs(budget?.period[1]).format(`DD.MM.YYYY`)} - ${dayjs(budget?.period[0]).format(`DD.MM.YYYY`)}`}
                 </Typography.Title>
             </Flex>
             <div className={styles.budgetBalance}>
