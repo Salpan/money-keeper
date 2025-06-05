@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Money Keeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Money Keeper** — приложение для анализа вашего бюджета. С его помощью вы можете создавать и управлять несколькими бюджетами, добавлять транзакции, отслеживать изменения баланса до и после операций, а также анализировать данные с помощью динамических графиков.
 
-Currently, two official plugins are available:
+## Ключевые возможности
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Мульти-бюджетность:** Создавайте и управляйте несколькими бюджетами для различных направлений расходов или доходов.
+- **Учет транзакций:** Добавляйте доходы и расходы для каждого бюджета и получайте вгляд в финансовые изменения.
+- **Отслеживание баланса:** Легко сравнивайте, какой был баланс и какой стал после совершения транзакций.
+- **Динамические графики:** Интерактивные визуальные отчёты помогают быстро распознать тенденции в расходах и доходах.
 
-## Expanding the ESLint configuration
+## Стек технологий
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** – библиотека для создания пользовательских интерфейсов.  
+- **TypeScript** – строгая типизация для повышения надёжности кода.  
+- **Vite** – быстрый и современный сборщик проектов.  
+- **Ant Design (AntD)** – готовые компоненты для стильных и функциональных интерфейсов.  
+- **Effector** – эффективное управление состоянием приложения.  
+- **ChartJS2** – библиотека для создания интерактивных и наглядных графиков.
 
--   Configure the top-level `parserOptions` property like this:
+## Установка
 
-```js
-export default tseslint.config({
-    languageOptions: {
-        // other options...
-        parserOptions: {
-            project: ['./tsconfig.node.json', './tsconfig.app.json'],
-            tsconfigRootDir: import.meta.dirname,
-        },
-    },
-});
-```
+1. **Клонируйте репозиторий:**
+    ```bash
+    git clone https://github.com/Salpan/money-keeper.git
+    ```
+2. **Перейдите в директорию проекта:**
+    ```bash
+    cd money-keeper
+    ```
+3. **Установите зависимости:**
+    ```bash
+    npm install
+    ```
+4. **Запустите приложение:**
+    ```bash
+    npm run dev
+    ```
+    Приложение будет доступно по адресу `http://localhost:3000`.
 
--   Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
--   Optionally add `...tseslint.configs.stylisticTypeChecked`
--   Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-    // Set the react version
-    settings: { react: { version: '18.3' } },
-    plugins: {
-        // Add the react plugin
-        react,
-    },
-    rules: {
-        // other rules...
-        // Enable its recommended rules
-        ...react.configs.recommended.rules,
-        ...react.configs['jsx-runtime'].rules,
-    },
-});
-```
