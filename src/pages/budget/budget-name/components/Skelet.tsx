@@ -21,15 +21,7 @@ export const Skelet: FC = () => {
                     <Typography.Title level={4}>
                         Начальный капитал:
                     </Typography.Title>
-                    <p>
-                        {
-                            <Skeleton.Input
-                                // style={{ width: '15px' }}
-                                size="small"
-                                active
-                            />
-                        }
-                    </p>
+                    <p>{<Skeleton.Input size="small" active />}</p>
                 </div>
                 <div>
                     <Typography.Title level={4}>Баланс: </Typography.Title>

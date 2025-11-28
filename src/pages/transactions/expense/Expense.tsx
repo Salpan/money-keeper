@@ -21,7 +21,6 @@ export const Expense: FC = () => {
     const isPending = useUnit(addTransactionFx.pending);
 
     const finishHandler = (values: TransactionForm) => {
-        console.log(values);
         createTransactionEv({
             ...values,
             transaction: TransactionType.Expense,

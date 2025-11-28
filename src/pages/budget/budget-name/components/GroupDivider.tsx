@@ -2,8 +2,6 @@ import { List } from 'antd';
 import dayjs from 'dayjs';
 import { FC } from 'react';
 
-// require('dayjs/locale/ru');
-
 type GroupDividerProps = {
     date?: string;
 };

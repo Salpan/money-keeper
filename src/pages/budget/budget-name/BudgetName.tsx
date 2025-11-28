@@ -31,7 +31,6 @@ const calculateTransactions = (
         }
         return acc;
     }, 0);
-    console.log({ result });
     return result;
 };
 
@@ -42,10 +41,6 @@ export const BudgetName: FC = () => {
 
     const budget = useUnit($budget);
 
-    console.log(budget?.transactions);
-
-    console.log(budget?.startBudget, 'start budget');
-
     const balance =
         budget?.transactions?.reduce((acc, transaction) => {
             if (transaction.transaction === 'income')
@@ -54,8 +49,6 @@ export const BudgetName: FC = () => {
         }, budget?.startBudget ?? 0) ??
         budget?.startBudget ??
         0;
-
-    console.log({ balance });
 
     const { styles } = useStyles();
     const { id } = useParams();
@@ -67,10 +60,6 @@ export const BudgetName: FC = () => {
     }, [id]);
 
     const isPending = useUnit(getBudgetByIdFx.pending);
-
-    // if (isPending) return <Skelet />;
-
-    console.log(budget?.transactions);
 
     const budgetId = budgetList.find((budget) => budget.id === id);
 

@@ -41,7 +41,6 @@ sample({
 sample({
     clock: addBudgetFx.doneData,
     fn: (response) => {
-        console.log({ response });
         return response.data?.id ? `budget/${response.data.id}` : '';
     },
     target: [navigateEv, getAllBudgetsEv],

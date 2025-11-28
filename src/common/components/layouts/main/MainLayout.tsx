@@ -33,7 +33,6 @@ export const MainLayout: FC = () => {
     }));
 
     const handleMenu: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
         const path = e.keyPath.reverse().join('/');
         navigate(path);
     };
